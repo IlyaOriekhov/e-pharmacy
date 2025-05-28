@@ -102,7 +102,6 @@ const orderSchema = new Schema(
   }
 );
 
-//
 orderSchema.index({ userId: 1 });
 orderSchema.index({ status: 1 });
 orderSchema.index({ orderDate: -1 });

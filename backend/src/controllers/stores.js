@@ -6,7 +6,6 @@ import {
   getStoreCities,
 } from "../services/stores.js";
 
-// Отримання найближчих магазинів
 export const getNearestPharmacies = async (req, res) => {
   try {
     const { limit } = req.query;
@@ -26,7 +25,6 @@ export const getNearestPharmacies = async (req, res) => {
   }
 };
 
-// Отримання всіх магазинів
 export const getStores = async (req, res) => {
   try {
     const filters = {
@@ -53,7 +51,6 @@ export const getStores = async (req, res) => {
   }
 };
 
-// Отримання магазину за ID
 export const getStore = async (req, res) => {
   try {
     const { id } = req.params;
@@ -74,7 +71,6 @@ export const getStore = async (req, res) => {
   }
 };
 
-// Отримання міст
 export const getCities = async (req, res) => {
   try {
     const cities = await getStoreCities();
