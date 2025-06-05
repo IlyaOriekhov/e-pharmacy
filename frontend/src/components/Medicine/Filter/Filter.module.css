@@ -1,0 +1,94 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.customSelect {
+  width: 100%;
+}
+
+.label {
+  position: relative;
+  display: block;
+}
+
+.label .input {
+  width: 100%;
+  padding-right: 50px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  stroke: black;
+  fill: none;
+  width: 16px;
+  height: 16px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.submitBtn {
+  width: 116px;
+  padding: 13px 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28em;
+}
+
+.resetBtn {
+  padding: 13px 30px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28em;
+  min-width: 80px;
+  transition: var(--transition);
+}
+
+.resetBtn:hover {
+  border-color: var(--color-green);
+  color: var(--color-green);
+}
+
+.filterIcon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--color-white);
+}
+
+@media (min-width: 768px) {
+  .form {
+    margin-bottom: 32px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .customSelect {
+    width: 214px;
+  }
+
+  .label .input {
+    width: 224px;
+  }
+
+  .buttonGroup {
+    flex-direction: row;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .form {
+    margin-bottom: 40px;
+  }
+}

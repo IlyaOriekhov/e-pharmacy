@@ -1,0 +1,16 @@
+.navLink {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoIcon {
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .navLink {
+    gap: 14px;
+  }
+}

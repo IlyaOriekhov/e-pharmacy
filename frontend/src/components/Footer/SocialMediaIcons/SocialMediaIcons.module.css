@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.icon {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-icon);
+  width: 44px;
+  height: 44px;
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon:hover {
+  border: 1px solid rgba(247, 248, 250, 0.5);
+}
+
+.icon svg {
+  width: 28px;
+  height: 28px;
+}

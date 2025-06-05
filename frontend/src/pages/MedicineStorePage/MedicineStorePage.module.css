@@ -1,0 +1,302 @@
+.container {
+  padding-top: 64px;
+  padding-bottom: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: var(--color-light-gray);
+}
+
+.title {
+  color: var(--color-black);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.14em;
+  margin-bottom: 40px;
+  margin-top: 0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  position: relative;
+  padding: 32px 32px 40px;
+  border-radius: 27px;
+  border: 1.155px solid var(--color-sub-white);
+  background: #e7f1ed;
+  overflow: hidden;
+}
+
+.item::before {
+  position: absolute;
+  content: "";
+  width: 166.806px;
+  height: 35.383px;
+  transform: rotate(22deg);
+  right: -50.914px;
+  bottom: -30.039px;
+  border-radius: 20px 0px 0px 20px;
+  background: rgba(89, 177, 122, 0.08);
+}
+
+.item::after {
+  position: absolute;
+  content: "";
+  width: 166.806px;
+  height: 35.383px;
+  transform: rotate(22deg);
+  right: -42.914px;
+  bottom: 19.961px;
+  border-radius: 20px 0px 0px 20px;
+  background: rgba(89, 177, 122, 0.08);
+}
+
+.subTitle {
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4em;
+  margin-bottom: 32px;
+  margin-top: 0;
+  max-width: 123px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.addressBox {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.phoneBox {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.phoneBox::after {
+  position: absolute;
+  content: "";
+  width: 166.806px;
+  height: 35.383px;
+  transform: rotate(22deg);
+  right: -132.914px;
+  bottom: 1.96px;
+  border-radius: 20px 0px 0px 20px;
+  background: rgba(89, 177, 122, 0.08);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--color-green);
+}
+
+.addressList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--color-gray);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addressList a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.phoneBox p {
+  color: var(--color-gray);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28em;
+  margin: 0;
+}
+
+.phoneBox a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.visitStoreBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.visitStoreLink {
+  display: block;
+  padding: 10px 16px;
+  background: var(--color-green);
+  border-radius: 24px;
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1em;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.visitStoreLink:hover {
+  background: #3f945f;
+}
+
+.ratingWithBtn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.ratingBox {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ratingBox p {
+  color: var(--color-black);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28em;
+  margin: 0;
+}
+
+.starIcon {
+  width: 16px;
+  height: 16px;
+  fill: #ffc531;
+  stroke: none;
+}
+
+.isOpenItem {
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5em;
+  letter-spacing: -0.24px;
+}
+
+.open {
+  background: rgba(89, 177, 122, 0.1);
+  color: var(--color-green);
+}
+
+.closed {
+  background: rgba(232, 80, 80, 0.1);
+  color: #e85050;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-top: 80px;
+    padding-bottom: 120px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  .title {
+    margin-bottom: 32px;
+  }
+  .list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px 16px;
+    width: 704px;
+  }
+  .item {
+    min-width: 344px;
+    padding: 40px;
+  }
+
+  .item::before {
+    right: -57.914px;
+    bottom: 162.961px;
+  }
+
+  .item::after {
+    right: -39.914px;
+    bottom: 217.961px;
+  }
+  .subTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+    max-width: 150px;
+  }
+
+  .addressBox {
+    margin-bottom: 14px;
+  }
+  .phoneBox {
+    margin-bottom: 36px;
+  }
+  .phoneBox::after {
+    right: -138.914px;
+    bottom: 128.96px;
+  }
+  .addressList {
+    font-size: 16px;
+    line-height: 1.25em;
+  }
+  .phoneBox p {
+    font-size: 16px;
+    line-height: 1.25em;
+  }
+  .ratingWithBtn {
+    top: 202px;
+    right: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 100px 128px 120px;
+  }
+  .title {
+    margin-bottom: 40px;
+  }
+  .list {
+    width: 1248px;
+    gap: 40px 20px;
+  }
+  .item {
+    min-width: 381px;
+  }
+
+  .item::before {
+    right: -34.914px;
+    bottom: 164.961px;
+  }
+
+  .item::after {
+    right: -17.914px;
+    bottom: 219.961px;
+  }
+  .phoneBox::after {
+    right: -123.91px;
+    bottom: 128.96px;
+  }
+}

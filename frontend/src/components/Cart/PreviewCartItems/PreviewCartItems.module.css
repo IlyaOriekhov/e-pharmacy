@@ -1,0 +1,192 @@
+.wrapper {
+  width: 100%;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list li:first-child {
+  padding-top: 0;
+}
+
+.list li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.item {
+  cursor: pointer;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(29, 30, 33, 0.1);
+  display: flex;
+  gap: 12px;
+  transition: var(--transition);
+}
+
+.item:hover {
+  background: rgba(89, 177, 122, 0.05);
+  border-radius: 8px;
+}
+
+.imgBox {
+  width: 120px;
+  height: 120px;
+  border-radius: 27px;
+  border: 1.155px solid #f1f1f1;
+  overflow: hidden;
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textBox {
+  width: 100%;
+}
+
+.mainTextWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.subtitle {
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4em;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.text {
+  color: #6a6a6f;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.17em;
+  margin: 0;
+}
+
+.price {
+  color: var(--color-black);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.17em;
+  margin: 0;
+}
+
+.btnBox {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+
+.amountBox {
+  border-radius: 60px;
+  border: 1px solid rgba(29, 30, 33, 0.1);
+  padding: 7px 14px;
+  display: flex;
+  width: 95px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amountBox button {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.amountBox button svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--color-green);
+}
+
+.amountBox p {
+  color: var(--color-black);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43em;
+  margin: 0;
+}
+
+.removeBtn {
+  border-radius: 40px;
+  background: rgba(232, 80, 80, 0.1);
+  padding: 8px 12px;
+  width: 89px;
+  color: #e85050;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  background: #e85050;
+  color: var(--color-white);
+}
+
+@media (min-width: 768px) {
+  .imgBox {
+    width: 122px;
+    height: 133px;
+  }
+
+  .item {
+    gap: 20px;
+  }
+
+  .mainTextWrap {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 38px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.28em;
+  }
+
+  .price {
+    font-size: 14px;
+    line-height: 1.28em;
+  }
+
+  .btnBox {
+    justify-content: space-between;
+  }
+
+  .amountBox {
+    padding: 12px 18px;
+    width: 108px;
+  }
+
+  .amountBox p {
+    font-size: 16px;
+    line-height: 1.25em;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    width: 460px;
+  }
+}

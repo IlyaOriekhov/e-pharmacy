@@ -1,0 +1,17 @@
+.btn {
+  background: transparent;
+  padding: 13px 28px;
+  border-radius: 60px;
+  color: #f1f1f1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1em;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 15px 32px;
+  }
+}

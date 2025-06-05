@@ -1,0 +1,31 @@
+.wrapper {
+  border-top: 1px solid var(--border-outline);
+  padding-top: 20px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--color-sub-white);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .list {
+    gap: 24px;
+    font-size: 14px;
+    line-height: 1.28em;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 33px;
+  }
+}

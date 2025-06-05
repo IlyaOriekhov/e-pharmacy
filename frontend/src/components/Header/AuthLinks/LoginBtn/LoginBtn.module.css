@@ -1,0 +1,14 @@
+.btn {
+  background: transparent;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+
+.navLink {
+  text-decoration: none;
+  color: inherit;
+  text-decoration: underline;
+}

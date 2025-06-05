@@ -1,0 +1,159 @@
+.container {
+  padding-bottom: 91px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: var(--color-light-gray);
+}
+
+.wrapper {
+  padding: 40px 20px 20px 20px;
+  border-radius: 32px;
+  background: var(--color-green);
+  margin-bottom: 48px;
+}
+
+.contentBox {
+  margin-bottom: 39px;
+}
+
+.title {
+  color: #f1f1f1;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.14em;
+  letter-spacing: -0.28px;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.text {
+  color: #f1f1f1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28em;
+  margin-bottom: 40px;
+  margin-top: 0;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btnLink {
+  display: block;
+  border-radius: 60px;
+  padding: 13px 32px;
+  border: 1px solid rgba(241, 241, 241, 0.5);
+  color: #f1f1f1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28em;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btnLink:hover {
+  background: #f1f1f1;
+  color: var(--color-green);
+}
+
+.imgBox img {
+  border-radius: 0px 24px 24px 0px;
+  width: 310px;
+  height: 335px;
+  object-fit: cover;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 43px;
+  row-gap: 16px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--color-black);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.28em;
+  letter-spacing: -0.28px;
+}
+
+.featureIcon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-green);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-bottom: 130px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .wrapper {
+    padding: 104px 48px 40px;
+    margin-bottom: 73px;
+  }
+  .contentBox {
+    margin-bottom: 83px;
+  }
+  .title {
+    font-size: 48px;
+    letter-spacing: -0.48px;
+    margin-bottom: 24px;
+  }
+  .text {
+    width: 488px;
+    font-size: 16px;
+    line-height: 1.25em;
+  }
+
+  .btnLink {
+    padding: 13px 50px;
+  }
+
+  .imgBox img {
+    width: 633px;
+    height: 406px;
+  }
+
+  .featureItem {
+    font-size: 16px;
+    line-height: 1.25em;
+    letter-spacing: -0.32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding-left: 96px;
+    padding-right: 96px;
+  }
+  .wrapper {
+    padding: 40px 40px 40px 80px;
+    display: flex;
+    gap: 19px;
+    align-items: center;
+  }
+  .contentBox {
+    margin-bottom: 0;
+  }
+  .title {
+    width: 501px;
+  }
+  .featuresList {
+    gap: 60px;
+  }
+}

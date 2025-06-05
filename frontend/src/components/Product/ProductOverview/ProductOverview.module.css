@@ -1,0 +1,161 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imgBox {
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 27px;
+  border: 1.155px solid rgba(89, 177, 122, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgBox img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.infoBox {
+  border-radius: 20px;
+  background: var(--color-white);
+  padding: 20px;
+  margin-bottom: 8px;
+}
+
+.namePriceBox {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.name {
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4em;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.text {
+  color: rgba(29, 30, 33, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+.price {
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4em;
+  margin: 0;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amountBox {
+  border-radius: 60px;
+  border: 1px solid rgba(29, 30, 33, 0.1);
+  padding: 12px 18px;
+  width: 108px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.amountBox button {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.amountBox button svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-green);
+}
+
+.amountBox p {
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25em;
+  margin: 0;
+}
+
+.addToCartBtn {
+  padding: 13px 32px;
+  width: 140px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28em;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .imgBox {
+    width: 364px;
+    height: 284px;
+  }
+
+  .infoBox {
+    padding: 32px;
+  }
+
+  .namePriceBox {
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 66px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .btnBox {
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .imgBox {
+    height: 337px;
+  }
+
+  .infoBox {
+    padding: 20px;
+  }
+
+  .namePriceBox {
+    flex-direction: row;
+    margin-bottom: 40px;
+  }
+}

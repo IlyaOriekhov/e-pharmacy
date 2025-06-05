@@ -1,0 +1,108 @@
+.section {
+  background: #59b17a;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.container {
+  padding-top: 197px;
+  padding-bottom: 246px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.heroBox {
+  width: 331px;
+  height: 312px;
+  padding: 19px 0 91px;
+  background-image: url("../../../assets/images/mob/hero_mob@1x.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .heroBox {
+    background-image: url("../../../assets/images/mob/hero_mob@2x.png");
+  }
+}
+
+.title {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 1em;
+  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+  text-shadow: 0px 4px 85px rgba(29, 30, 33, 0.3);
+}
+
+.text {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33em;
+  margin-left: auto;
+  width: 156px;
+  margin: 0 0 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-top: 186px;
+    padding-bottom: 258px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .heroBox {
+    width: 704px;
+    height: 508px;
+    padding: 140px 64px 156px 31px;
+    background-image: url("../../../assets/images/tab/hero_tab@1x.png");
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .heroBox {
+      background-image: url("../../../assets/images/tab/hero_tab@2x.png");
+    }
+  }
+
+  .title {
+    font-size: 74px;
+    margin-bottom: 24px;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.25em;
+    margin-right: 19px;
+    width: 207px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding-top: 73px;
+    padding-bottom: 146px;
+    padding-left: 96px;
+    padding-right: 96px;
+  }
+
+  .heroBox {
+    width: 749px;
+    padding: 140px 86px 156px 54px;
+    background-image: url("../../../assets/images/desk/hero_desk@1x.png");
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .heroBox {
+      background-image: url("../../../assets/images/desk/hero_desk@2x.png");
+    }
+  }
+
+  .title {
+    width: 609px;
+  }
+}

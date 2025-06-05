@@ -1,0 +1,33 @@
+.navList {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 80px;
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+.navList a {
+  color: var(--color-sub-white);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.28em;
+  text-decoration: none;
+}
+
+@ screen and (min-width: 768px) {
+  .navList {
+    margin-bottom: 32px;
+  }
+
+  .navList a {
+    font-size: 16px;
+  }
+}
+
+@ screen and (min-width: 1440px) {
+  .navList {
+    gap: 50px;
+    margin-bottom: 0;
+  }
+}
