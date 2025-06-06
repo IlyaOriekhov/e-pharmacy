@@ -119,10 +119,20 @@ export const getCartItems = createAsyncThunk(
   "cart-items",
   async (_, { rejectWithValue, getState }) => {
     try {
-      setToken(getState().auth.token);
+      const state = getState();
+      const token = state.auth.token;
+
+      if (!token) {
+        console.error("❌ No token found in state");
+        return rejectWithValue("No authentication token");
+      }
+
+      setToken(token);
       const response = await instance.get("/cart");
+
       return response.data;
     } catch (error) {
+      console.error("❌ getCartItems error:", error);
       return rejectWithValue(error.message);
     }
   }
@@ -132,16 +142,43 @@ export const addToCart = createAsyncThunk(
   "cart-add",
   async (body, { rejectWithValue, getState }) => {
     try {
-      setToken(getState().auth.token);
+      const state = getState();
+      const token = state.auth.token;
 
+      if (!token) {
+        return rejectWithValue("No authentication token");
+      }
+
+      setToken(token);
       const response = await instance.post("/cart/add", body);
 
       toast.success("Product added to cart");
       return response.data;
     } catch (error) {
       console.error("❌ addToCart error:", error);
-      console.error("❌ Error response:", error.response?.data);
       toast.error("Failed to add product to cart");
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const decreaseQuantity = createAsyncThunk(
+  "cart-update",
+  async (body, { rejectWithValue, getState }) => {
+    try {
+      const state = getState();
+      const token = state.auth.token;
+
+      if (!token) {
+        return rejectWithValue("No authentication token");
+      }
+
+      setToken(token);
+      const response = await instance.put("/cart/update", body);
+
+      return response.data;
+    } catch (error) {
+      console.error("❌ decreaseQuantity error:", error);
       return rejectWithValue(error.message);
     }
   }
@@ -149,26 +186,25 @@ export const addToCart = createAsyncThunk(
 
 export const deleteFromCart = createAsyncThunk(
   "cart-remove",
-  async (id, { rejectWithValue, getState }) => {
+  async (productId, { rejectWithValue, getState }) => {
     try {
-      setToken(getState().auth.token);
-      const response = await instance.delete(`/cart/remove/${id}`);
+      const state = getState();
+      const token = state.auth.token;
+
+      if (!token) {
+        return rejectWithValue("No authentication token");
+      }
+
+      setToken(token);
+      const response = await instance.delete("/cart/remove", {
+        data: { productId },
+      });
+
       toast.success("Product removed from cart");
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const decreaseQuantity = createAsyncThunk(
-  "cart-decrease",
-  async (body, { rejectWithValue, getState }) => {
-    try {
-      setToken(getState().auth.token);
-      const response = await instance.patch("/cart/decrease", body);
-      return response.data;
-    } catch (error) {
+      console.error("❌ deleteFromCart error:", error);
+      toast.error("Failed to remove product from cart");
       return rejectWithValue(error.message);
     }
   }
@@ -178,11 +214,36 @@ export const cartCheckout = createAsyncThunk(
   "cart-checkout",
   async (body, { rejectWithValue, getState }) => {
     try {
-      setToken(getState().auth.token);
-      const response = await instance.post("/cart/checkout", body);
+      const state = getState();
+      const token = state.auth.token;
+
+      if (!token) {
+        return rejectWithValue("No authentication token");
+      }
+
+      setToken(token);
+
+      const checkoutData = {
+        name: body.name,
+        email: body.email,
+        phone: body.phone,
+        address: body.address,
+        paymentMethod: body.payment === "cash" ? "Cash On Delivery" : "Bank",
+      };
+
+      await instance.post("/cart/checkout", checkoutData);
+
       toast.success("The order is successful. Wait for a call to confirm.");
-      return response.data;
+
+      return {
+        data: {
+          items: [],
+          totalAmount: 0,
+          totalItems: 0,
+        },
+      };
     } catch (error) {
+      console.error("❌ cartCheckout error:", error);
       toast.error("Something went wrong. Please try again.");
       return rejectWithValue(error.message);
     }

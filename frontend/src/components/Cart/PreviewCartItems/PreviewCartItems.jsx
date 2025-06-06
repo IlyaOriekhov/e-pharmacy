@@ -16,11 +16,12 @@ const PreviewCartItems = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector(selectCart);
-  const cartItemsQuantity = cart?.cartProducts?.length || 0;
+
+  const cartItems = cart?.cartProducts || cart?.items || [];
 
   useEffect(() => {
     dispatch(getCartItems());
-  }, [dispatch, cartItemsQuantity]);
+  }, [dispatch]);
 
   const handleIncreaseAmount = (id) => {
     dispatch(
@@ -31,13 +32,17 @@ const PreviewCartItems = () => {
     );
   };
 
-  const handleDecreaseAmount = (id) => {
-    dispatch(
-      decreaseQuantity({
-        productId: id,
-        quantity: 1,
-      })
-    );
+  const handleDecreaseAmount = (id, currentQuantity) => {
+    if (currentQuantity <= 1) {
+      dispatch(deleteFromCart(id));
+    } else {
+      dispatch(
+        decreaseQuantity({
+          productId: id,
+          quantity: currentQuantity - 1,
+        })
+      );
+    }
   };
 
   const handleDeleteProduct = (id) => {
@@ -50,66 +55,99 @@ const PreviewCartItems = () => {
     });
   };
 
+  if (!cartItems || cartItems.length === 0) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.emptyCart}>
+          <p>Your cart is empty</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
-        {cart?.cartProducts?.map((product) => (
-          <li
-            key={product.productId._id}
-            className={styles.item}
-            onClick={() => handleProductClick(product.productId._id)}
-          >
-            <div className={styles.imgBox}>
-              <img src={product.productId.photo} alt="product" />
-            </div>
-            <div className={styles.textBox}>
-              <div className={styles.mainTextWrap}>
-                <div>
-                  <h3 className={styles.subtitle}>{product.productId.name}</h3>
-                  <p className={styles.text}>{product.productId.category}</p>
-                </div>
-                <p className={styles.price}>{`৳ ${product.productId.price}`}</p>
-              </div>
-              <div className={styles.btnBox}>
-                <div className={styles.amountBox}>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleIncreaseAmount(product.productId._id);
-                    }}
-                  >
-                    <svg>
-                      <use href={`${sprite}#plus`} />
-                    </svg>
-                  </button>
-                  <p>{product.quantity}</p>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDecreaseAmount(product.productId._id);
-                    }}
-                  >
-                    <svg>
-                      <use href={`${sprite}#minus`} />
-                    </svg>
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  className={styles.removeBtn}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteProduct(product.productId._id);
+        {cartItems.map((item, index) => {
+          const product = item.productId || item.product || item;
+          const quantity = item.quantity || 1;
+
+          if (!product) {
+            console.error("❌ Product is undefined for item:", item);
+            return null;
+          }
+
+          return (
+            <li
+              key={product._id || product.id || index}
+              className={styles.item}
+              onClick={() => handleProductClick(product._id || product.id)}
+            >
+              <div className={styles.imgBox}>
+                <img
+                  src={product.photo || product.image || "/placeholder.jpg"}
+                  alt="product"
+                  onError={(e) => {
+                    e.target.src = "/placeholder.jpg";
                   }}
-                >
-                  Remove
-                </button>
+                />
               </div>
-            </div>
-          </li>
-        ))}
+              <div className={styles.textBox}>
+                <div className={styles.mainTextWrap}>
+                  <div>
+                    <h3 className={styles.subtitle}>
+                      {product.name || "Unknown Product"}
+                    </h3>
+                    <p className={styles.text}>
+                      {product.category || "Unknown Category"}
+                    </p>
+                  </div>
+                  <p className={styles.price}>{`৳ ${product.price || 0}`}</p>
+                </div>
+                <div className={styles.btnBox}>
+                  <div className={styles.amountBox}>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleIncreaseAmount(product._id || product.id);
+                      }}
+                    >
+                      <svg>
+                        <use href={`${sprite}#plus`} />
+                      </svg>
+                    </button>
+                    <p>{quantity}</p>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDecreaseAmount(
+                          product._id || product.id,
+                          quantity
+                        );
+                      }}
+                    >
+                      <svg>
+                        <use href={`${sprite}#minus`} />
+                      </svg>
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    className={styles.removeBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteProduct(product._id || product.id);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

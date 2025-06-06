@@ -2,6 +2,13 @@
   width: 100%;
 }
 
+.emptyCart {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6a6a6f;
+  font-style: italic;
+}
+
 .list {
   list-style: none;
   padding: 0;

@@ -18,7 +18,12 @@ const initialState = {
   reviews: [],
   products: [],
   product: null,
-  cart: [],
+  // cart:  [],
+  cart: {
+    cartProducts: [],
+    total: 0,
+    totalItems: 0,
+  },
   currentPage: 1,
   totalPages: null,
   totalProducts: null,
@@ -61,23 +66,85 @@ export const slice = createSlice({
       })
       .addCase(getCartItems.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.cart = payload;
+
+        if (payload.data) {
+          state.cart = {
+            cartProducts: payload.data.items || [],
+            total: payload.data.totalAmount || 0,
+            totalItems: payload.data.totalItems || 0,
+          };
+        } else if (payload.items) {
+          state.cart = {
+            cartProducts: payload.items || [],
+            total: payload.totalAmount || 0,
+            totalItems: payload.totalItems || 0,
+          };
+        } else {
+          state.cart = {
+            cartProducts: [],
+            total: 0,
+            totalItems: 0,
+          };
+        }
       })
-      .addCase(cartCheckout.fulfilled, (state, { payload }) => {
+      .addCase(cartCheckout.fulfilled, (state) => {
         state.isLoading = false;
-        state.cart = payload;
+        state.cart = {
+          cartProducts: [],
+          total: 0,
+          totalItems: 0,
+        };
       })
       .addCase(deleteFromCart.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.cart = payload;
+
+        if (payload.data) {
+          state.cart = {
+            cartProducts: payload.data.items || [],
+            total: payload.data.totalAmount || 0,
+            totalItems: payload.data.totalItems || 0,
+          };
+        } else if (payload.items) {
+          state.cart = {
+            cartProducts: payload.items || [],
+            total: payload.totalAmount || 0,
+            totalItems: payload.totalItems || 0,
+          };
+        }
       })
       .addCase(addToCart.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.cart = payload;
+
+        if (payload.data) {
+          state.cart = {
+            cartProducts: payload.data.items || [],
+            total: payload.data.totalAmount || 0,
+            totalItems: payload.data.totalItems || 0,
+          };
+        } else if (payload.items) {
+          state.cart = {
+            cartProducts: payload.items || [],
+            total: payload.totalAmount || 0,
+            totalItems: payload.totalItems || 0,
+          };
+        }
       })
       .addCase(decreaseQuantity.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.cart = payload;
+
+        if (payload.data) {
+          state.cart = {
+            cartProducts: payload.data.items || [],
+            total: payload.data.totalAmount || 0,
+            totalItems: payload.data.totalItems || 0,
+          };
+        } else if (payload.items) {
+          state.cart = {
+            cartProducts: payload.items || [],
+            total: payload.totalAmount || 0,
+            totalItems: payload.totalItems || 0,
+          };
+        }
       })
       .addMatcher(
         isAnyOf(

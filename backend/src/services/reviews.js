@@ -15,7 +15,6 @@ export const getCustomerReviews = async (limit = 10) => {
     "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=64&h=64&fit=crop&crop=face&auto=format",
   ];
 
-  // Додаємо дефолтні фото якщо їх немає
   const reviewsWithPhotos = reviews.map((review, index) => ({
     ...review,
     photo: review.photo || workingPhotos[index % workingPhotos.length],

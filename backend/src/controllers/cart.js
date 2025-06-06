@@ -1,4 +1,3 @@
-// src/controllers/cart.js
 import createHttpError from "http-errors";
 import {
   getCartItems,
@@ -12,14 +11,18 @@ import {
 export const getCart = async (req, res) => {
   try {
     const userId = req.user._id;
+
     const cartData = await getCartItems(userId);
 
-    res.status(200).json({
+    const response = {
       status: 200,
       message: "Cart items retrieved successfully",
       data: cartData,
-    });
+    };
+
+    res.status(200).json(response);
   } catch (error) {
+    console.error("❌ Backend getCart error:", error);
     if (error.message === "User not found") {
       throw createHttpError(404, error.message);
     }
@@ -34,12 +37,15 @@ export const addItemToCart = async (req, res) => {
 
     const cartData = await addToCart(userId, productId, Number(quantity));
 
-    res.status(200).json({
+    const response = {
       status: 200,
       message: "Item added to cart successfully",
       data: cartData,
-    });
+    };
+
+    res.status(200).json(response);
   } catch (error) {
+    console.error("❌ Backend addToCart error:", error);
     if (
       error.message.includes("not found") ||
       error.message.includes("stock")

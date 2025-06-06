@@ -93,7 +93,7 @@ const options = [
 const Filter = ({ totalPages }) => {
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage);
-  const [selectedCategory, setSelectedCategory] = useState(options[0]); // Дефолт "All"
+  const [selectedCategory, setSelectedCategory] = useState(options[0]);
   const [searchedName, setSearchedName] = useState("");
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1440px)" });
@@ -153,8 +153,8 @@ const Filter = ({ totalPages }) => {
   };
 
   const handleReset = () => {
-    setSelectedCategory(options[0]); // Повернути до "All"
-    setSearchedName(""); // Очистити пошук
+    setSelectedCategory(options[0]);
+    setSearchedName("");
     dispatch(
       getSearchProducts({
         category: "",
