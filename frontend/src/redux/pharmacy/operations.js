@@ -15,14 +15,28 @@ import { toast } from "react-toastify";
 //   }
 // );
 
+// export const getCustomerReviews = createAsyncThunk("reviews", async (body) => {
+//   try {
+//     const { limit = 3 } = body;
+//     const response = await instance.get(`/customer-reviews?limit=${limit}`);
+//     return response.data || [];
+//   } catch (error) {
+//     console.warn("getCustomerReviews failed:", error.message);
+//     return [];
+//   }
+// });
+
 export const getCustomerReviews = createAsyncThunk("reviews", async (body) => {
   try {
     const { limit = 3 } = body;
     const response = await instance.get(`/customer-reviews?limit=${limit}`);
-    return response.data || [];
+
+    // Витягти дані з обгортки
+    return (
+      response.data.data.reviews || response.data.data || response.data || []
+    );
   } catch (error) {
     console.warn("getCustomerReviews failed:", error.message);
-    // Повернути пустий масив замість помилки
     return [];
   }
 });
@@ -39,48 +53,110 @@ export const getCustomerReviews = createAsyncThunk("reviews", async (body) => {
 //     }
 //   }
 // );
+// export const getNearestStores = createAsyncThunk(
+//   "nearest-stores",
+//   async (body) => {
+//     try {
+//       const { limit = 6 } = body;
+//       const response = await instance.get(`/stores/nearest?limit=${limit}`);
+//       return response.data || [];
+//     } catch (error) {
+//       console.warn("getNearestStores failed:", error.message);
+//       return [];
+//     }
+//   }
+// );
+
 export const getNearestStores = createAsyncThunk(
   "nearest-stores",
   async (body) => {
     try {
       const { limit = 6 } = body;
       const response = await instance.get(`/stores/nearest?limit=${limit}`);
-      return response.data || [];
+
+      return (
+        response.data.data.stores || response.data.data || response.data || []
+      );
     } catch (error) {
       console.warn("getNearestStores failed:", error.message);
-      // Повернути пустий масив замість помилки
       return [];
     }
   }
 );
 
-export const getAllStores = createAsyncThunk(
-  "all-stores",
-  async (body, { rejectWithValue }) => {
-    try {
-      const { limit = "" } = body;
-      const response = await instance.get(`/stores?limit=${limit}`);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+// export const getAllStores = createAsyncThunk(
+//   "all-stores",
+//   async (body, { rejectWithValue }) => {
+//     try {
+//       const { limit = "" } = body;
+//       const response = await instance.get(`/stores?limit=${limit}`);
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
-export const getSearchProducts = createAsyncThunk(
-  "products",
-  async (body, { rejectWithValue }) => {
-    try {
-      const { category = "", name = "", page = "", limit = "" } = body;
-      const response = await instance.get(
-        `/products?category=${category}&name=${name}&page=${page}&limit=${limit}`
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
+export const getAllStores = createAsyncThunk("all-stores", async (body) => {
+  try {
+    const { limit = "" } = body;
+    const response = await instance.get(`/stores?limit=${limit}`);
+
+    return (
+      response.data.data.stores || response.data.data || response.data || []
+    );
+  } catch (error) {
+    console.warn("getAllStores failed:", error.message);
+    return [];
   }
-);
+});
+
+// export const getSearchProducts = createAsyncThunk(
+//   "products",
+//   async (body, { rejectWithValue }) => {
+//     try {
+//       const { category = "", name = "", page = "", limit = "" } = body;
+//       const response = await instance.get(
+//         `/products?category=${category}&name=${name}&page=${page}&limit=${limit}`
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+export const getSearchProducts = createAsyncThunk("products", async (body) => {
+  try {
+    const { category = "", name = "", page = 1, limit = 12 } = body;
+
+    const validPage = Math.max(1, parseInt(page) || 1);
+    const validLimit = Math.max(1, parseInt(limit) || 12);
+
+    const response = await instance.get(
+      `/products?category=${category}&name=${name}&page=${validPage}&limit=${validLimit}`
+    );
+
+    const responseData = response.data.data || {};
+    const products = responseData.products || [];
+    const pagination = responseData.pagination || {};
+
+    return {
+      products: products,
+      currentPage: pagination.page || validPage,
+      totalPages: pagination.totalPages || 1,
+      totalProducts: pagination.total || products.length,
+    };
+  } catch (error) {
+    console.warn("getSearchProducts failed:", error.message);
+    return {
+      products: [],
+      currentPage: 1,
+      totalPages: 1,
+      totalProducts: 0,
+    };
+  }
+});
 
 export const getProductById = createAsyncThunk(
   "products/:id",

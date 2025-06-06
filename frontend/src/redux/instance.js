@@ -1,12 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "https://e-pharmacy-k31y.onrender.com/";
+const BASE_URL = "https://e-pharmacy-k31y.onrender.com";
 
 const instance = axios.create({
   baseURL: BASE_URL + "/api",
   headers: {
     "Content-Type": "application/json",
   },
+  timeout: 30000,
 });
 
 export const setToken = (token) => {

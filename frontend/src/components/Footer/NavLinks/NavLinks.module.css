@@ -15,7 +15,7 @@
   text-decoration: none;
 }
 
-@ screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .navList {
     margin-bottom: 32px;
   }
@@ -25,7 +25,7 @@
   }
 }
 
-@ screen and (min-width: 1440px) {
+@media (min-width: 1440px) {
   .navList {
     gap: 50px;
     margin-bottom: 0;
