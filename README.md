@@ -62,7 +62,6 @@ E-Pharmacy is a modern web platform for online pharmacies that allows customers 
 - **Node.js** - Runtime environment
 - **Express** - Web framework
 - **MongoDB + Mongoose** - Database
-- **JWT** - Authentication
 - **Bcrypt** - Password hashing
 - **Joi** - Server-side validation
 
