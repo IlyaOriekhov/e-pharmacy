@@ -1,5 +1,3 @@
-# e-pharmacy
-
 # E-Pharmacy - Online Pharmacy Platform
 
 E-Pharmacy is a modern web platform for online pharmacies that allows customers to browse medications, manage their cart, and place orders with ease.

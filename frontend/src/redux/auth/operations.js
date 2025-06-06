@@ -7,9 +7,12 @@ export const registerThunk = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const response = await instance.post("/user/register", body);
+
       setToken(response.data.token);
       localStorage.setItem("refreshToken", response.data.token);
       localStorage.setItem("accessToken", response.data.token);
+      toast.success("Registration successful!");
+
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -34,6 +37,8 @@ export const loginThunk = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const response = await instance.post("/user/login", body);
+
+      toast.success("User logged in successfully");
       setToken(response.data.token);
       localStorage.setItem("refreshToken", response.data.token);
       localStorage.setItem("accessToken", response.data.token);
@@ -51,6 +56,7 @@ export const logoutThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await instance.post("/user/logout");
+      toast.success("User logged out successfully");
       clearToken();
       localStorage.clear("refreshToken");
       localStorage.clear("accessToken");
