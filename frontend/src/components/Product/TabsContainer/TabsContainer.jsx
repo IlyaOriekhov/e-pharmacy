@@ -103,44 +103,52 @@ const TabsContainer = () => {
 
       {showReviews && (
         <ul className={styles.reviewsList}>
-          {product?.reviews?.map((review, index) => (
-            <li key={index} className={styles.reviewItem}>
-              <div className={styles.imgNameBox}>
-                <div className={styles.imgBox}>
-                  <img src={review.photo} alt="user" />
+          {product.reviews && product.reviews.length > 0 ? (
+            product.reviews.map((review, index) => (
+              <li key={index} className={styles.reviewItem}>
+                <div className={styles.imgNameBox}>
+                  <div className={styles.imgBox}>
+                    <img src={review.photo} alt="user" />
+                  </div>
+                  <div>
+                    <h3 className={styles.name}>
+                      {review.name || review.reviewer}
+                    </h3>
+                    <p className={styles.time}>{review.time || "2 days ago"}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className={styles.name}>{review.reviewer}</h3>
-                  <p className={styles.time}>{review.time}</p>
-                </div>
-              </div>
-              <p className={styles.reviewText}>{review.review}</p>
-              <div className={styles.ratingBox}>
-                <div className={styles.stars}>
-                  <svg className={styles.starIcon}>
-                    <use href={`${sprite}#star`} />
-                  </svg>
-                  {isTabletOrDesktop && (
-                    <>
+                <p className={styles.reviewText}>
+                  {review.testimonial || review.review}
+                </p>
+                <div className={styles.ratingBox}>
+                  <div className={styles.stars}>
+                    {[...Array(5)].map((_, starIndex) => (
+                      <svg
+                        key={starIndex}
+                        className={
+                          starIndex < (review.rating || 5)
+                            ? styles.starIcon
+                            : styles.starIconGray
+                        }
+                      >
+                        <use href={`${sprite}#star`} />
+                      </svg>
+                    ))}
+                    {!isTabletOrDesktop && (
                       <svg className={styles.starIcon}>
                         <use href={`${sprite}#star`} />
                       </svg>
-                      <svg className={styles.starIcon}>
-                        <use href={`${sprite}#star`} />
-                      </svg>
-                      <svg className={styles.starIcon}>
-                        <use href={`${sprite}#star`} />
-                      </svg>
-                      <svg className={styles.starIconGray}>
-                        <use href={`${sprite}#star`} />
-                      </svg>
-                    </>
-                  )}
+                    )}
+                  </div>
+                  <p className={styles.rating}>{review.rating || 5}</p>
                 </div>
-                <p className={styles.rating}>{review.rating}</p>
-              </div>
+              </li>
+            ))
+          ) : (
+            <li className={styles.noReviews}>
+              <p>No reviews yet. Be the first to leave a review!</p>
             </li>
-          ))}
+          )}
         </ul>
       )}
     </div>

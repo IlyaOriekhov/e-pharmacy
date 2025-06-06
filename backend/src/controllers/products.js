@@ -5,6 +5,7 @@ import {
   getProductCategories,
   searchProducts,
 } from "../services/products.js";
+import { getCustomerReviews } from "../services/reviews.js";
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -46,16 +47,27 @@ export const getAllProducts = async (req, res) => {
 export const getProduct = async (req, res) => {
   try {
     const { id } = req.params;
+
     const product = await getProductById(id);
 
-    res.status(200).json({
+    const reviews = await getCustomerReviews(3);
+
+    const productWithReviews = {
+      ...product,
+      reviews: reviews,
+    };
+
+    const response = {
       status: 200,
       message: "Product retrieved successfully",
       data: {
-        product,
+        product: productWithReviews,
       },
-    });
+    };
+
+    res.status(200).json(response);
   } catch (error) {
+    console.error("❌ Backend error:", error);
     if (error.message === "Product not found") {
       throw createHttpError(404, error.message);
     }

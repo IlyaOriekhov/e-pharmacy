@@ -10,6 +10,13 @@
   margin-bottom: 20px;
 }
 
+.noReviews {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6a6a6f;
+  font-style: italic;
+}
+
 .tabBtn {
   padding: 8px 25px;
   border-radius: 40px;
