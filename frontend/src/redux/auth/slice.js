@@ -30,7 +30,7 @@ export const slice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.token = payload.token;
+        state.token = payload.accessToken;
         state.isLoggedIn = true;
         state.user = payload.user;
       })

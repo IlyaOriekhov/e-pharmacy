@@ -7,13 +7,8 @@ export const registerThunk = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const response = await instance.post("/user/register", body);
-
-      setToken(response.data.token);
-      localStorage.setItem("refreshToken", response.data.token);
-      localStorage.setItem("accessToken", response.data.token);
       toast.success("Registration successful!");
-
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {
@@ -36,15 +31,24 @@ export const loginThunk = createAsyncThunk(
   "login",
   async (body, { rejectWithValue }) => {
     try {
+      clearToken();
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
+
       const response = await instance.post("/user/login", body);
 
-      toast.success("User logged in successfully");
-      setToken(response.data.token);
-      localStorage.setItem("refreshToken", response.data.token);
-      localStorage.setItem("accessToken", response.data.token);
-      toast.success(`Welcome to E-Pharmacy ${response.data.user.name}!`);
-      return response.data;
+      const responseData = response.data.data;
+      const accessToken = responseData.accessToken;
+      const refreshToken = responseData.refreshToken;
+
+      setToken(accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("accessToken", accessToken);
+
+      toast.success(`Welcome to E-Pharmacy ${responseData.user.name}!`);
+      return responseData;
     } catch (error) {
+      console.error("Login error:", error);
       toast.error("Email or password is invalid");
       return rejectWithValue(error.message);
     }
@@ -55,18 +59,20 @@ export const logoutThunk = createAsyncThunk(
   "logout",
   async (_, { rejectWithValue }) => {
     try {
-      await instance.post("/user/logout");
+      await instance.get("/user/logout");
       toast.success("User logged out successfully");
       clearToken();
-      localStorage.clear("refreshToken");
-      localStorage.clear("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
     } catch (error) {
-      switch (error.response.status) {
-        case 401:
-          toast.error("You are not authorized to log out.");
-          break;
-        default:
-          toast.error("Something went wrong. Please try again later");
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:
+            toast.error("You are not authorized to log out.");
+            break;
+          default:
+            toast.error("Something went wrong. Please try again later");
+        }
       }
       return rejectWithValue(error.message);
     }
@@ -78,7 +84,7 @@ export const getUserInfoThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await instance.get("/user/user-info");
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

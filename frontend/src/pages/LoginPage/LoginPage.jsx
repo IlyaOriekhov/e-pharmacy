@@ -7,6 +7,8 @@ import { loginThunk } from "../../redux/auth/operations";
 import { loginSchema } from "../../schemas/yupSchemas";
 import Logo from "../../components/Header/Logo/Logo";
 import styles from "./LoginPage.module.css";
+import { useEffect } from "react";
+import { clearToken } from "../../redux/instance";
 
 import pillMob1x from "../../assets/images/mob/pill_mob@1x.png";
 import pillMob2x from "../../assets/images/mob/pill_mob@2x.png";
@@ -19,6 +21,12 @@ const LoginPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const isTabletOrDesktop = useMediaQuery({ query: "(min-width: 768px)" });
 
+  useEffect(() => {
+    clearToken();
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,7 +37,7 @@ const LoginPage = () => {
       dispatch(loginThunk(values))
         .unwrap()
         .then(() => {
-          navigate("/home");
+          navigate("/medicine-store");
         });
     },
   });
