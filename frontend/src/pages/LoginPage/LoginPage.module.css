@@ -98,11 +98,6 @@
     margin-bottom: 168px;
   }
 
-  .mainWrapper {
-    display: flex;
-    gap: 150px;
-  }
-
   .imgWrapper {
     top: -104px;
     right: 19px;
@@ -116,7 +111,10 @@
   }
 
   .inputBox {
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-bottom: 62px;
+    gap: 20px 14px;
   }
 
   .inputBox .input {
@@ -136,5 +134,10 @@
 
   .logoWrapper {
     margin-bottom: 226px;
+  }
+
+  .mainWrapper {
+    display: flex;
+    gap: 54px;
   }
 }
