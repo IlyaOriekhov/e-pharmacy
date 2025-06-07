@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { selectCurrentPage } from "../../../redux/pharmacy/selectors";
 import { setCurrentPage } from "../../../redux/pharmacy/slice";
@@ -8,7 +9,9 @@ import sprite from "../../../assets/icons/sprite.svg";
 
 const Pagination = ({ totalPages }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentPage = useSelector(selectCurrentPage);
+  const [searchParams] = useSearchParams();
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const buttonsPerPage = isMobile ? 2 : 3;
 
@@ -16,22 +19,32 @@ const Pagination = ({ totalPages }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
-  const handlePageClick = useCallback(
+  const updateUrlAndPage = useCallback(
     (pageNumber) => {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set("page", pageNumber.toString());
+      navigate(`?${newSearchParams.toString()}`);
       dispatch(setCurrentPage(pageNumber));
     },
-    [dispatch]
+    [searchParams, navigate, dispatch]
+  );
+
+  const handlePageClick = useCallback(
+    (pageNumber) => {
+      updateUrlAndPage(pageNumber);
+    },
+    [updateUrlAndPage]
   );
 
   const handlePrevClick = () => {
     if (currentPage > 1) {
-      dispatch(setCurrentPage(currentPage - 1));
+      updateUrlAndPage(currentPage - 1);
     }
   };
 
   const handleNextClick = () => {
     if (currentPage < totalPages) {
-      dispatch(setCurrentPage(currentPage + 1));
+      updateUrlAndPage(currentPage + 1);
     }
   };
 
@@ -61,7 +74,7 @@ const Pagination = ({ totalPages }) => {
       <div className={styles.btnList}>
         <button
           className={styles.btn}
-          onClick={() => dispatch(setCurrentPage(1))}
+          onClick={() => updateUrlAndPage(1)}
           disabled={currentPage === 1}
         >
           <svg className={styles.icon}>
@@ -106,7 +119,7 @@ const Pagination = ({ totalPages }) => {
         </button>
         <button
           className={styles.btn}
-          onClick={() => dispatch(setCurrentPage(totalPages))}
+          onClick={() => updateUrlAndPage(totalPages)}
           disabled={currentPage === totalPages}
         >
           <svg className={styles.icon}>

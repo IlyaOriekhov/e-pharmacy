@@ -40,7 +40,7 @@ const NavLinks = () => {
           </li>
           <li>
             <NavLink
-              to="/medicine"
+              to="/medicine?page=1"
               className={({ isActive }) =>
                 isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }

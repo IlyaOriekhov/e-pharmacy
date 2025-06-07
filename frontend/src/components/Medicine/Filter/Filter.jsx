@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { getSearchProducts } from "../../../redux/pharmacy/operations";
-import { selectCurrentPage } from "../../../redux/pharmacy/selectors";
+import { setCurrentPage } from "../../../redux/pharmacy/slice";
 import styles from "./Filter.module.css";
 import sprite from "../../../assets/icons/sprite.svg";
 
@@ -90,79 +91,72 @@ const options = [
   { value: "Skin Care", label: "Skin Care" },
 ];
 
-const Filter = ({ totalPages }) => {
+const Filter = () => {
   const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage);
-  const [selectedCategory, setSelectedCategory] = useState(options[0]);
-  const [searchedName, setSearchedName] = useState("");
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const categoryFromUrl = searchParams.get("category") || "";
+  const nameFromUrl =
+    searchParams.get("name") || searchParams.get("search") || "";
+  const pageFromUrl = parseInt(searchParams.get("page")) || 1;
+
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    return options.find((opt) => opt.value === categoryFromUrl) || options[0];
+  });
+  const [searchedName, setSearchedName] = useState(nameFromUrl);
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1440px)" });
 
+  const updateURL = (newCategory, newName, newPage = 1) => {
+    const params = new URLSearchParams();
+
+    if (newCategory && newCategory !== "") {
+      params.set("category", newCategory);
+    }
+    if (newName && newName !== "") {
+      params.set("name", newName);
+    }
+    params.set("page", newPage.toString());
+
+    const queryString = params.toString();
+    navigate(`?${queryString}`, { replace: false });
+  };
+
   useEffect(() => {
+    dispatch(setCurrentPage(pageFromUrl));
+
     dispatch(
       getSearchProducts({
-        category: selectedCategory.value,
-        name: searchedName,
-        page: currentPage,
+        category: categoryFromUrl,
+        name: nameFromUrl,
+        page: pageFromUrl,
         limit: isDesktop ? 12 : 9,
       })
     );
-  }, [
-    dispatch,
-    selectedCategory,
-    searchedName,
-    currentPage,
-    isDesktop,
-    totalPages,
-  ]);
+  }, [dispatch, categoryFromUrl, nameFromUrl, pageFromUrl, isDesktop]);
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
-    dispatch(
-      getSearchProducts({
-        category: selectedOption.value,
-        name: searchedName,
-        page: 1,
-        limit: isDesktop ? 12 : 9,
-      })
-    );
+    updateURL(selectedOption.value, searchedName, 1);
+    dispatch(setCurrentPage(1));
   };
 
   const handleSearchInputChange = (e) => {
     setSearchedName(e.target.value);
-    dispatch(
-      getSearchProducts({
-        category: selectedCategory.value,
-        name: e.target.value,
-        page: 1,
-        limit: isDesktop ? 12 : 9,
-      })
-    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      getSearchProducts({
-        category: selectedCategory.value,
-        name: searchedName,
-        page: 1,
-        limit: isDesktop ? 12 : 9,
-      })
-    );
+    updateURL(selectedCategory.value, searchedName, 1);
+    dispatch(setCurrentPage(1));
   };
 
   const handleReset = () => {
     setSelectedCategory(options[0]);
     setSearchedName("");
-    dispatch(
-      getSearchProducts({
-        category: "",
-        name: "",
-        page: 1,
-        limit: isDesktop ? 12 : 9,
-      })
-    );
+    navigate("/medicine?page=1", { replace: false });
+    dispatch(setCurrentPage(1));
   };
 
   return (

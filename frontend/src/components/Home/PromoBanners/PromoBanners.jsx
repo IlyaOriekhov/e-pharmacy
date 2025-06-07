@@ -1,12 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentPage } from "../../../redux/pharmacy/slice";
 import styles from "./PromoBanners.module.css";
 
 const PromoBanners = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleShopNow = (discount) => {
-    navigate(`/medicine?discount=${discount}`);
+    dispatch(setCurrentPage(1));
+    navigate(`/medicine?discount=${discount}&page=1`);
   };
 
   const handleReadMore = () => {

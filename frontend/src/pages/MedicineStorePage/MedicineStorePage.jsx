@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { selectAllStores } from "../../redux/pharmacy/selectors";
 import { getAllStores } from "../../redux/pharmacy/operations";
+import { setCurrentPage } from "../../redux/pharmacy/slice";
 import styles from "./MedicineStorePage.module.css";
 import sprite from "../../assets/icons/sprite.svg";
 
@@ -21,6 +22,10 @@ const MedicineStorePage = () => {
       })
     );
   }, [dispatch, storesLimit]);
+
+  const handleVisitStore = () => {
+    dispatch(setCurrentPage(1));
+  };
 
   return (
     <section>
@@ -58,7 +63,11 @@ const MedicineStorePage = () => {
                 </div>
                 {isTabletOrDesktop && (
                   <button className={styles.visitStoreBtn}>
-                    <NavLink to="/medicine" className={styles.visitStoreLink}>
+                    <NavLink
+                      to="/medicine?page=1"
+                      className={styles.visitStoreLink}
+                      onClick={handleVisitStore}
+                    >
                       Visit Store
                     </NavLink>
                   </button>

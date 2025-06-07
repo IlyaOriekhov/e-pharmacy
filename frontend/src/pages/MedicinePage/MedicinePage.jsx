@@ -48,7 +48,7 @@ const MedicinePage = () => {
 
   const handleDetailsClick = (id) => {
     dispatch(getProductById(id)).then(() => {
-      navigate("/product");
+      navigate(`/product/${id}`);
     });
   };
 
@@ -57,7 +57,7 @@ const MedicinePage = () => {
       <section>
         <div className={styles.container}>
           <h2 className={styles.title}>Medicine</h2>
-          <Filter totalPages={totalPages} />
+          <Filter />
           <ul className={styles.list}>
             {products &&
               products.length > 0 &&

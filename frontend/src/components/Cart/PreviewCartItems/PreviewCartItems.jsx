@@ -7,7 +7,6 @@ import {
   decreaseQuantity,
   deleteFromCart,
   getCartItems,
-  getProductById,
 } from "../../../redux/pharmacy/operations";
 import styles from "./PreviewCartItems.module.css";
 import sprite from "../../../assets/icons/sprite.svg";
@@ -50,9 +49,7 @@ const PreviewCartItems = () => {
   };
 
   const handleProductClick = (id) => {
-    dispatch(getProductById(id)).then(() => {
-      navigate("/product");
-    });
+    navigate(`/product/${id}`);
   };
 
   if (!cartItems || cartItems.length === 0) {

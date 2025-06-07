@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectNearestStores } from "../../../redux/pharmacy/selectors";
-import { getNearestStores } from "../../../redux/pharmacy/operations"; 
+import { getNearestStores } from "../../../redux/pharmacy/operations";
+import { setCurrentPage } from "../../../redux/pharmacy/slice";
 import styles from "./NearestStores.module.css";
 import sprite from "../../../assets/icons/sprite.svg";
 
@@ -20,8 +21,8 @@ const NearestStores = () => {
   }, [dispatch]);
 
   const handleStoreClick = () => {
-    
-    navigate("/medicine");
+    dispatch(setCurrentPage(1));
+    navigate("/medicine?page=1");
   };
 
   return (
@@ -37,37 +38,39 @@ const NearestStores = () => {
               <li
                 key={store._id}
                 className={styles.item}
-                onClick={handleStoreClick} 
+                style={{ cursor: "pointer" }}
               >
-                <h3 className={styles.subTitle}>{store.name}</h3>
-                <div className={styles.addressBox}>
-                  <svg className={styles.icon}>
-                    <use href={`${sprite}#map`} />
-                  </svg>
-                  <ul className={styles.addressList}>
-                    <li>
-                      <a
-                        href={`https://maps.google.com/?q=${store.address},${store.city}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        {store.address}
-                      </a>
-                    </li>
-                    <li>{store.city}</li>
-                  </ul>
-                </div>
-                <div className={styles.phoneBox}>
-                  <svg className={styles.icon}>
-                    <use href={`${sprite}#phone`} />
-                  </svg>
-                  <a
-                    href={`tel:${store.phone}`}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <p>{store.phone}</p>
-                  </a>
+                <div onClick={handleStoreClick}>
+                  <h3 className={styles.subTitle}>{store.name}</h3>
+                  <div className={styles.addressBox}>
+                    <svg className={styles.icon}>
+                      <use href={`${sprite}#map`} />
+                    </svg>
+                    <ul className={styles.addressList}>
+                      <li>
+                        <a
+                          href={`https://maps.google.com/?q=${store.address},${store.city}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {store.address}
+                        </a>
+                      </li>
+                      <li>{store.city}</li>
+                    </ul>
+                  </div>
+                  <div className={styles.phoneBox}>
+                    <svg className={styles.icon}>
+                      <use href={`${sprite}#phone`} />
+                    </svg>
+                    <a
+                      href={`tel:${store.phone}`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <p>{store.phone}</p>
+                    </a>
+                  </div>
                 </div>
                 <div className={styles.ratingWithBtn}>
                   <div className={styles.ratingBox}>
