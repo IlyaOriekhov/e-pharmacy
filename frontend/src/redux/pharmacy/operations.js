@@ -47,7 +47,7 @@ export const getSearchProducts = createAsyncThunk("products", async (body) => {
 
     return result;
   } catch (error) {
-    console.error("❌ Search error:", error);
+    console.error(" Search error:", error);
     console.error("Error details:", {
       message: error.message,
       response: error.response?.data,
