@@ -52,7 +52,6 @@ E-Pharmacy is a modern web platform for online pharmacies that allows customers 
 - **React Router DOM** - Routing
 - **Formik + Yup** - Form handling and validation
 - **Axios** - HTTP client
-- **React Spinners** - Loading indicators
 - **React Toastify** - Notifications
 - **CSS Modules** - Styling
 
