@@ -65,8 +65,7 @@ export const checkoutSchema = Joi.object({
     "any.required": "Phone number is required",
   }),
 
-  address: Joi.string().min(10).max(200).required().messages({
-    "string.min": "Address must be at least 10 characters long",
+  address: Joi.string().max(200).required().messages({
     "string.max": "Address cannot exceed 200 characters",
     "any.required": "Delivery address is required",
   }),

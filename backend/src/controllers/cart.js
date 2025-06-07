@@ -22,7 +22,6 @@ export const getCart = async (req, res) => {
 
     res.status(200).json(response);
   } catch (error) {
-    console.error("❌ Backend getCart error:", error);
     if (error.message === "User not found") {
       throw createHttpError(404, error.message);
     }
@@ -45,7 +44,6 @@ export const addItemToCart = async (req, res) => {
 
     res.status(200).json(response);
   } catch (error) {
-    console.error("❌ Backend addToCart error:", error);
     if (
       error.message.includes("not found") ||
       error.message.includes("stock")

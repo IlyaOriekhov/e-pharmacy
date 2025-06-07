@@ -67,7 +67,6 @@ export const getProduct = async (req, res) => {
 
     res.status(200).json(response);
   } catch (error) {
-    console.error("❌ Backend error:", error);
     if (error.message === "Product not found") {
       throw createHttpError(404, error.message);
     }

@@ -7,7 +7,6 @@ E-Pharmacy is a modern web platform for online pharmacies that allows customers 
 ### 🔐 Authentication
 
 - User registration and login
-- JWT token-based authentication with automatic refresh
 - Protected routes for authenticated users
 - Persistent login sessions
 
@@ -270,7 +269,6 @@ This project is licensed under the MIT License.
 
 - **Frontend Developer** - React, Redux, CSS Modules
 - **Backend Developer** - Node.js, Express, MongoDB
-- **UI/UX Designer** - Design system and user experience
 
 ---
 

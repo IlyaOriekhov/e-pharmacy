@@ -108,8 +108,6 @@ export const getProductById = createAsyncThunk(
 
       return productWithDescription;
     } catch (error) {
-      console.error("❌ getProductById error:", error);
-      console.error("❌ Error response:", error.response?.data);
       return rejectWithValue(error.message);
     }
   }
@@ -123,7 +121,6 @@ export const getCartItems = createAsyncThunk(
       const token = state.auth.token;
 
       if (!token) {
-        console.error("❌ No token found in state");
         return rejectWithValue("No authentication token");
       }
 
@@ -132,7 +129,6 @@ export const getCartItems = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.error("❌ getCartItems error:", error);
       return rejectWithValue(error.message);
     }
   }
@@ -155,7 +151,6 @@ export const addToCart = createAsyncThunk(
       toast.success("Product added to cart");
       return response.data;
     } catch (error) {
-      console.error("❌ addToCart error:", error);
       toast.error("Failed to add product to cart");
       return rejectWithValue(error.message);
     }
@@ -178,7 +173,6 @@ export const decreaseQuantity = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.error("❌ decreaseQuantity error:", error);
       return rejectWithValue(error.message);
     }
   }
@@ -203,7 +197,6 @@ export const deleteFromCart = createAsyncThunk(
       toast.success("Product removed from cart");
       return response.data;
     } catch (error) {
-      console.error("❌ deleteFromCart error:", error);
       toast.error("Failed to remove product from cart");
       return rejectWithValue(error.message);
     }
@@ -228,7 +221,7 @@ export const cartCheckout = createAsyncThunk(
         email: body.email,
         phone: body.phone,
         address: body.address,
-        paymentMethod: body.payment === "cash" ? "Cash On Delivery" : "Bank",
+        paymentMethod: body.paymentMethod,
       };
 
       await instance.post("/cart/checkout", checkoutData);
@@ -243,9 +236,15 @@ export const cartCheckout = createAsyncThunk(
         },
       };
     } catch (error) {
-      console.error("❌ cartCheckout error:", error);
-      toast.error("Something went wrong. Please try again.");
-      return rejectWithValue(error.message);
+      if (error.response?.status === 400) {
+        const errorMessage =
+          error.response?.data?.message || "Validation error";
+        toast.error(`Order failed: ${errorMessage}`);
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );

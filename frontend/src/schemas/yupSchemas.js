@@ -1,7 +1,6 @@
 import * as Yup from "yup";
 
-const phoneRegex =
-  /^(\+?380|\+?38|\(?0)\d{2}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+const phoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/;
 
 export const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -36,10 +35,9 @@ export const orderSchema = Yup.object().shape({
     .matches(phoneRegex, "Invalid phone number")
     .required("Required"),
   address: Yup.string()
-    .min(2, "Too short!")
-    .max(50, "Too long!")
+    .max(200, "Address cannot exceed 200 characters")
     .required("Required"),
-  payment: Yup.string()
-    .oneOf(["cash", "bank"])
+  paymentMethod: Yup.string()
+    .oneOf(["Cash On Delivery", "Bank"])
     .required("Payment method is required"),
 });

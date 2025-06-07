@@ -73,7 +73,6 @@ const PreviewCartItems = () => {
           const quantity = item.quantity || 1;
 
           if (!product) {
-            console.error("❌ Product is undefined for item:", item);
             return null;
           }
 

@@ -21,21 +21,40 @@ const CartForm = () => {
       email: "",
       phone: "",
       address: "",
-      payment: isCashPayment ? "cash" : "bank",
+      paymentMethod: "Cash On Delivery",
     },
     validationSchema: orderSchema,
     onSubmit: (values) => {
+     
+
       if (!cart || !cart.cartProducts || cart.cartProducts.length === 0) {
         toast.error("Please select product to make an order");
         return;
       }
-      dispatch(cartCheckout(values))
+
+      const orderData = {
+        name: values.name.trim(),
+        email: values.email.trim(),
+        phone: values.phone.trim(),
+        address: values.address.trim(),
+        paymentMethod: isCashPayment ? "Cash On Delivery" : "Bank",
+      };
+
+      dispatch(cartCheckout(orderData))
         .unwrap()
         .then(() => {
           navigate("/home");
+        })
+        .catch((error) => {
+          console.error("Checkout error:", error);
         });
     },
   });
+
+  const handlePaymentChange = (isCash) => {
+    setIsCashPayment(isCash);
+    formik.setFieldValue("paymentMethod", isCash ? "Cash On Delivery" : "Bank");
+  };
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.form}>
@@ -52,7 +71,7 @@ const CartForm = () => {
             name="name"
             placeholder="Enter text"
             onChange={formik.handleChange}
-            value={formik.values.name.trim()}
+            value={formik.values.name}
             className="input"
           />
           {formik.errors.name && formik.touched.name && (
@@ -66,7 +85,7 @@ const CartForm = () => {
             name="email"
             placeholder="Enter text"
             onChange={formik.handleChange}
-            value={formik.values.email.trim()}
+            value={formik.values.email}
             className="input"
           />
           {formik.errors.email && formik.touched.email && (
@@ -112,23 +131,23 @@ const CartForm = () => {
           <label className={styles.radioLabel}>
             <input
               type="radio"
-              name="payment"
+              name="paymentMethod"
               checked={isCashPayment}
-              onChange={() => setIsCashPayment(true)}
+              onChange={() => handlePaymentChange(true)}
             />
             Cash On Delivery
           </label>
           <label className={styles.radioLabel}>
             <input
               type="radio"
-              name="payment"
+              name="paymentMethod"
               checked={!isCashPayment}
-              onChange={() => setIsCashPayment(false)}
+              onChange={() => handlePaymentChange(false)}
             />
             Bank
           </label>
-          {formik.errors.payment && formik.touched.payment && (
-            <span className="error-text">{formik.errors.payment}</span>
+          {formik.errors.paymentMethod && formik.touched.paymentMethod && (
+            <span className="error-text">{formik.errors.paymentMethod}</span>
           )}
         </div>
       </div>

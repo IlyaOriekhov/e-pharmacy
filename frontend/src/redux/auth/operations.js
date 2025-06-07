@@ -48,8 +48,6 @@ export const loginThunk = createAsyncThunk(
       toast.success(`Welcome to E-Pharmacy ${responseData.user.name}!`);
       return responseData;
     } catch (error) {
-      console.error("❌ Login error:", error);
-      console.error("❌ Login error response:", error.response?.data);
       toast.error("Email or password is invalid");
       return rejectWithValue(error.message);
     }
