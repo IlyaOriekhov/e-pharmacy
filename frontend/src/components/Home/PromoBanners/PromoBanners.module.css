@@ -1,11 +1,21 @@
 .container {
+  width: 375px;
+  margin: 0 auto;
   padding-top: 40px;
   padding-bottom: 80px;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
   background: var(--color-light-gray);
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 374px) {
+  .container {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 .list {
@@ -93,6 +103,7 @@
 
 @media (min-width: 768px) {
   .container {
+    width: 768px;
     padding-top: 64px;
     padding-bottom: 120px;
     padding-left: 32px;
@@ -136,6 +147,7 @@
 
 @media (min-width: 1440px) {
   .container {
+    width: 1440px;
     padding-left: 96px;
     padding-right: 96px;
   }

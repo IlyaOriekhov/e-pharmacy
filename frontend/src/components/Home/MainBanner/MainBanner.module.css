@@ -5,12 +5,22 @@
 }
 
 .container {
+  width: 375px;
+  margin: 0 auto;
   padding-top: 197px;
   padding-bottom: 246px;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 374px) {
+  .container {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 .heroBox {
@@ -50,6 +60,7 @@
 
 @media (min-width: 768px) {
   .container {
+    width: 768px;
     padding-top: 186px;
     padding-bottom: 258px;
     padding-left: 32px;
@@ -84,6 +95,7 @@
 
 @media (min-width: 1440px) {
   .container {
+    width: 1440px;
     padding-top: 73px;
     padding-bottom: 146px;
     padding-left: 96px;

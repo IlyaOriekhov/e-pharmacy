@@ -1,9 +1,19 @@
 .container {
+  width: 375px;
+  margin: 0 auto;
   padding-top: 64px;
   padding-bottom: 80px;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
   background: var(--color-light-gray);
+}
+
+@media (max-width: 374px) {
+  .container {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 .title {
@@ -27,7 +37,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-
   width: 100%;
   max-width: 335px;
 }
@@ -39,7 +48,6 @@
   border: 1.155px solid var(--color-sub-white);
   background: #e7f1ed;
   overflow: hidden;
-
   width: 100%;
   box-sizing: border-box;
 }
@@ -75,7 +83,6 @@
   line-height: 1.4em;
   margin-bottom: 32px;
   margin-top: 0;
-
   max-width: 130px;
   white-space: nowrap;
   overflow: hidden;
@@ -228,14 +235,17 @@
 
 @media (min-width: 768px) {
   .container {
+    width: 768px;
     padding-top: 80px;
     padding-bottom: 120px;
     padding-left: 32px;
     padding-right: 32px;
   }
+
   .title {
     margin-bottom: 32px;
   }
+
   .list {
     flex-direction: row;
     flex-wrap: wrap;
@@ -243,6 +253,7 @@
     width: 704px;
     max-width: none;
   }
+
   .item {
     min-width: 344px;
     width: auto;
@@ -258,6 +269,7 @@
     right: -39.914px;
     bottom: 217.961px;
   }
+
   .subTitle {
     font-size: 20px;
     margin-bottom: 20px;
@@ -267,21 +279,26 @@
   .addressBox {
     margin-bottom: 14px;
   }
+
   .phoneBox {
     margin-bottom: 36px;
   }
+
   .phoneBox::after {
     right: -128.914px;
     bottom: 120.96px;
   }
+
   .addressList {
     font-size: 16px;
     line-height: 1.25em;
   }
+
   .phoneBox p {
     font-size: 16px;
     line-height: 1.25em;
   }
+
   .ratingWithBtn {
     top: 202px;
     right: 40px;
@@ -290,15 +307,19 @@
 
 @media (min-width: 1440px) {
   .container {
+    width: 1440px;
     padding: 100px 128px 120px;
   }
+
   .title {
     margin-bottom: 40px;
   }
+
   .list {
     width: 1248px;
     gap: 40px 20px;
   }
+
   .item {
     min-width: 381px;
   }
@@ -312,6 +333,7 @@
     right: -17.914px;
     bottom: 219.961px;
   }
+
   .phoneBox::after {
     right: -123.91px;
     bottom: 111.96px;

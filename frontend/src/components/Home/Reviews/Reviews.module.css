@@ -1,8 +1,18 @@
 .container {
+  width: 375px;
+  margin: 0 auto;
   padding-bottom: 80px;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
   background: var(--color-light-gray);
+}
+
+@media (max-width: 374px) {
+  .container {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 .title {
@@ -82,28 +92,28 @@
 
 @media (min-width: 768px) {
   .container {
+    width: 768px;
     padding-bottom: 120px;
     padding-left: 32px;
     padding-right: 32px;
   }
-  .text {
-    font-size: 16px;
-    line-height: 1.25em;
-    margin-bottom: 88px;
-  }
+
   .title {
     font-size: 40px;
     line-height: 1.2em;
   }
+
   .text {
     font-size: 16px;
     line-height: 1.25em;
     margin-bottom: 88px;
   }
+
   .list {
     flex-direction: row;
     gap: 16px;
   }
+
   .item {
     flex: 1;
     padding: 54px 16px 32px;
@@ -113,12 +123,15 @@
 
 @media (min-width: 1440px) {
   .container {
+    width: 1440px;
     padding-left: 96px;
     padding-right: 96px;
   }
+
   .list {
     gap: 28px;
   }
+
   .item {
     padding: 54px 28px 32px;
     min-width: 382px;
