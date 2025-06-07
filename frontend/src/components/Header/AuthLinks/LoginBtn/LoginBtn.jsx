@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import styles from "./LoginBtn.module.css";
 
-const LoginBtn = ({ pageType }) => {
+const LoginBtn = ({ pageType, onLinkClick }) => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1440px)" });
 
   const btnColor = !isDesktop
@@ -14,7 +14,7 @@ const LoginBtn = ({ pageType }) => {
 
   return (
     <button className={styles.btn} style={{ color: btnColor }}>
-      <NavLink to="/login" className={styles.navLink}>
+      <NavLink to="/login" className={styles.navLink} onClick={onLinkClick}>
         Login
       </NavLink>
     </button>

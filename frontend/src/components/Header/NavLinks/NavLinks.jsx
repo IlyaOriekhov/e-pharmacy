@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import sprite from "../../../assets/icons/sprite.svg";
 import styles from "./NavLinks.module.css";
 
-const NavLinks = () => {
+const NavLinks = ({ onLinkClick }) => {
   const isMobileOrTablet = useMediaQuery({ query: "(max-width: 1439px)" });
 
   return (
@@ -24,6 +24,7 @@ const NavLinks = () => {
               className={({ isActive }) =>
                 isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }
+              onClick={onLinkClick}
             >
               Home
             </NavLink>
@@ -34,6 +35,7 @@ const NavLinks = () => {
               className={({ isActive }) =>
                 isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }
+              onClick={onLinkClick}
             >
               Medicine store
             </NavLink>
@@ -44,6 +46,7 @@ const NavLinks = () => {
               className={({ isActive }) =>
                 isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }
+              onClick={onLinkClick}
             >
               Medicine
             </NavLink>

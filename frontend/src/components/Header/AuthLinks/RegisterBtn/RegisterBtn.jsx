@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import styles from "./RegisterBtn.module.css";
 
-const RegisterBtn = ({ pageType }) => {
+const RegisterBtn = ({ pageType, onLinkClick }) => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1440px)" });
 
   const btnColor = !isDesktop
@@ -23,7 +23,7 @@ const RegisterBtn = ({ pageType }) => {
       className={styles.btn}
       style={{ color: btnColor, border: btnBorder }}
     >
-      <NavLink to="/register" className={styles.navLink}>
+      <NavLink to="/register" className={styles.navLink} onClick={onLinkClick}>
         Register
       </NavLink>
     </button>

@@ -53,11 +53,12 @@ const NearestStores = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
+                          className={styles.addressLink}
                         >
                           {store.address}
                         </a>
                       </li>
-                      <li>{store.city}</li>
+                      <li className={styles.cityText}>{store.city}</li>
                     </ul>
                   </div>
                   <div className={styles.phoneBox}>
@@ -68,7 +69,7 @@ const NearestStores = () => {
                       href={`tel:${store.phone}`}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <p>{store.phone}</p>
+                      <span className={styles.phoneText}>{store.phone}</span>
                     </a>
                   </div>
                 </div>

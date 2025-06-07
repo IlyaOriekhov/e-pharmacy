@@ -29,6 +29,10 @@ const Menu = ({ isOpen, onClose, pageType }) => {
     };
   }, [handleKeyDown, isOpen]);
 
+  const handleNavLinkClick = () => {
+    onClose();
+  };
+
   if (!isOpen) {
     return null;
   }
@@ -42,8 +46,8 @@ const Menu = ({ isOpen, onClose, pageType }) => {
               <use href={`${sprite}#close`} />
             </svg>
           </button>
-          <NavLinks />
-          <AuthLinks pageType={pageType} />
+          <NavLinks onLinkClick={handleNavLinkClick} />
+          <AuthLinks pageType={pageType} onLinkClick={handleNavLinkClick} />
         </div>
       </div>
     </div>

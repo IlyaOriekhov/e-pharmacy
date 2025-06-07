@@ -37,8 +37,8 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%; /* Повна ширина для мобільних */
-  max-width: 335px; /* Обмежуємо максимальну ширину */
+  width: 100%;
+  max-width: 335px;
 }
 
 .item {
@@ -50,8 +50,8 @@
   overflow: hidden;
   cursor: pointer;
   transition: var(--transition);
-  width: 100%; /* Повна ширина батьківського елементу */
-  box-sizing: border-box; /* Включаємо padding в загальну ширину */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .item:hover {
@@ -90,7 +90,7 @@
   line-height: 1.4em;
   margin-bottom: 32px;
   margin-top: 0;
-  max-width: 200px; /* Збільшуємо максимальну ширину для мобільних */
+  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -124,7 +124,7 @@
   width: 18px;
   height: 18px;
   stroke: var(--color-green);
-  flex-shrink: 0; /* Запобігаємо стисканню іконок */
+  flex-shrink: 0;
 }
 
 .addressList {
@@ -138,14 +138,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  flex: 1; /* Займає весь доступний простір */
-  min-width: 0; /* Дозволяє стискання */
+  flex: 1;
+  min-width: 0;
 }
 
 .addressList a {
   color: inherit;
   text-decoration: none;
-  word-break: break-word; /* Дозволяє перенос довгих адрес */
+  word-break: break-word;
 }
 
 .phoneBox p {
@@ -154,13 +154,13 @@
   font-weight: 400;
   line-height: 1.28em;
   margin: 0;
-  flex: 1; /* Займає весь доступний простір */
+  flex: 1;
 }
 
 .phoneBox a {
   color: inherit;
   text-decoration: none;
-  flex: 1; /* Займає весь доступний простір */
+  flex: 1;
 }
 
 .ratingWithBtn {
@@ -170,7 +170,7 @@
   display: flex;
   gap: 14px;
   align-items: center;
-  flex-shrink: 0; /* Запобігаємо стисканню */
+  flex-shrink: 0;
 }
 
 .ratingBox {
@@ -202,7 +202,7 @@
   font-weight: 600;
   line-height: 1.5em;
   letter-spacing: -0.24px;
-  white-space: nowrap; /* Запобігаємо переносу тексту */
+  white-space: nowrap;
 }
 
 .open {
@@ -238,12 +238,12 @@
     flex-wrap: wrap;
     gap: 32px 16px;
     width: 704px;
-    max-width: none; /* Прибираємо обмеження для планшетів */
+    max-width: none;
   }
 
   .item {
     min-width: 344px;
-    width: auto; /* Автоматична ширина для планшетів */
+    width: auto;
     padding: 40px 40px 46px;
   }
 
