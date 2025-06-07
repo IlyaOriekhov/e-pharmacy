@@ -24,12 +24,12 @@
   margin-bottom: 0;
 }
 
-@media (min-width: 768px) {
-  .text {
-    font-size: 16px;
-    line-height: 1.25em;
-  }
+.linksWrapper {
+  display: flex;
+  flex-direction: column;
+}
 
+@media (min-width: 768px) {
   .container {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -46,13 +46,14 @@
   .textWrapper {
     margin-bottom: 0;
   }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.25em;
+  }
 }
 
 @media (min-width: 1440px) {
-  .text {
-    width: 311px;
-  }
-
   .container {
     padding: 40px 128px;
   }
@@ -62,13 +63,12 @@
     margin-bottom: 64px;
   }
 
+  .text {
+    width: 311px;
+  }
+
   .linksWrapper {
     flex-direction: row;
     gap: 270px;
   }
-}
-
-.linksWrapper {
-  display: flex;
-  flex-direction: column;
 }

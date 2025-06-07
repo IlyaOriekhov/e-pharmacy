@@ -27,6 +27,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
+
+  width: 100%;
+  max-width: 335px;
 }
 
 .item {
@@ -36,6 +39,9 @@
   border: 1.155px solid var(--color-sub-white);
   background: #e7f1ed;
   overflow: hidden;
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .item::before {
@@ -69,7 +75,8 @@
   line-height: 1.4em;
   margin-bottom: 32px;
   margin-top: 0;
-  max-width: 123px;
+
+  max-width: 130px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -104,6 +111,7 @@
   width: 18px;
   height: 18px;
   stroke: var(--color-green);
+  flex-shrink: 0;
 }
 
 .addressList {
@@ -117,11 +125,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .addressList a {
   color: inherit;
   text-decoration: none;
+  word-break: break-word;
 }
 
 .phoneBox p {
@@ -130,11 +141,13 @@
   font-weight: 400;
   line-height: 1.28em;
   margin: 0;
+  flex: 1;
 }
 
 .phoneBox a {
   color: inherit;
   text-decoration: none;
+  flex: 1;
 }
 
 .visitStoreBtn {
@@ -168,6 +181,7 @@
   display: flex;
   gap: 14px;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .ratingBox {
@@ -199,6 +213,7 @@
   font-weight: 600;
   line-height: 1.5em;
   letter-spacing: -0.24px;
+  white-space: nowrap;
 }
 
 .open {
@@ -226,9 +241,11 @@
     flex-wrap: wrap;
     gap: 32px 16px;
     width: 704px;
+    max-width: none;
   }
   .item {
     min-width: 344px;
+    width: auto;
     padding: 40px;
   }
 
@@ -254,8 +271,8 @@
     margin-bottom: 36px;
   }
   .phoneBox::after {
-    right: -138.914px;
-    bottom: 128.96px;
+    right: -128.914px;
+    bottom: 120.96px;
   }
   .addressList {
     font-size: 16px;
@@ -297,6 +314,6 @@
   }
   .phoneBox::after {
     right: -123.91px;
-    bottom: 128.96px;
+    bottom: 111.96px;
   }
 }
