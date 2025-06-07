@@ -112,8 +112,6 @@ const Filter = () => {
 
   const executeSearch = React.useCallback(
     (category = "", search = "", page = 1) => {
-      console.log("🔍 Executing search:", { category, search, page });
-
       dispatch(setCurrentPage(page));
 
       dispatch(
@@ -141,33 +139,28 @@ const Filter = () => {
   }, [categoryFromUrl, searchFromUrl, pageFromUrl, executeSearch]);
 
   const handleCategoryChange = (selectedOption) => {
-    console.log("📂 Category changed:", selectedOption.value);
     setSelectedCategory(selectedOption);
     executeSearch(selectedOption.value, searchInput, 1);
   };
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
-    console.log("✏️ Search input changed:", value);
     setSearchInput(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("🚀 Form submitted");
     executeSearch(selectedCategory.value, searchInput, 1);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      console.log("⌨️ Enter pressed");
       executeSearch(selectedCategory.value, searchInput, 1);
     }
   };
 
   const handleReset = () => {
-    console.log("🔄 Reset filters");
     setSelectedCategory(options[0]);
     setSearchInput("");
     executeSearch("", "", 1);

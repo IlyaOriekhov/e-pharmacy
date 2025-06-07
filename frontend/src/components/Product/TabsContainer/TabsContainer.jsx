@@ -110,31 +110,37 @@ const TabsContainer = () => {
                   <div className={styles.imgBox}>
                     <img src={review.photo} alt="user" />
                   </div>
-                  <div>
+                  <div className={styles.nameAndTime}>
                     <h3 className={styles.name}>
                       {review.name || review.reviewer}
                     </h3>
                     <p className={styles.time}>{review.time || "2 days ago"}</p>
                   </div>
                 </div>
+
                 <p className={styles.reviewText}>
                   {review.testimonial || review.review}
                 </p>
+
+                {/* Рейтинг */}
                 <div className={styles.ratingBox}>
                   <div className={styles.stars}>
-                    {[...Array(5)].map((_, starIndex) => (
-                      <svg
-                        key={starIndex}
-                        className={
-                          starIndex < (review.rating || 5)
-                            ? styles.starIcon
-                            : styles.starIconGray
-                        }
-                      >
-                        <use href={`${sprite}#star`} />
-                      </svg>
-                    ))}
-                    {!isTabletOrDesktop && (
+                    {isTabletOrDesktop ? (
+                      // На планшеті/десктопі - всі 5 зірок
+                      [...Array(5)].map((_, starIndex) => (
+                        <svg
+                          key={starIndex}
+                          className={
+                            starIndex < (review.rating || 5)
+                              ? styles.starIcon
+                              : styles.starIconGray
+                          }
+                        >
+                          <use href={`${sprite}#star`} />
+                        </svg>
+                      ))
+                    ) : (
+                      // На мобільному - тільки одна зірка
                       <svg className={styles.starIcon}>
                         <use href={`${sprite}#star`} />
                       </svg>

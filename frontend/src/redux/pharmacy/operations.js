@@ -17,13 +17,6 @@ export const getSearchProducts = createAsyncThunk("products", async (body) => {
 
     const searchTerm = name || search || "";
 
-    console.log("🔍 Search params:", {
-      category,
-      searchTerm,
-      page: validPage,
-      limit: validLimit,
-    });
-
     const searchParams = new URLSearchParams();
 
     if (category && category.trim() !== "") {
@@ -38,10 +31,8 @@ export const getSearchProducts = createAsyncThunk("products", async (body) => {
     searchParams.set("limit", validLimit.toString());
 
     const url = `/products?${searchParams.toString()}`;
-    console.log("🌐 API URL:", url);
 
     const response = await instance.get(url);
-    console.log("📦 API Response:", response.data);
 
     const responseData = response.data.data || {};
     const products = responseData.products || [];
@@ -54,7 +45,6 @@ export const getSearchProducts = createAsyncThunk("products", async (body) => {
       totalProducts: pagination.total || products.length,
     };
 
-    console.log("✅ Processed result:", result);
     return result;
   } catch (error) {
     console.error("❌ Search error:", error);
