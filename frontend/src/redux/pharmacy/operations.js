@@ -2,6 +2,77 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import instance, { setToken } from "../instance";
 import { toast } from "react-toastify";
 
+export const getSearchProducts = createAsyncThunk("products", async (body) => {
+  try {
+    const {
+      category = "",
+      name = "",
+      search = "",
+      page = 1,
+      limit = 12,
+    } = body;
+
+    const validPage = Math.max(1, parseInt(page) || 1);
+    const validLimit = Math.max(1, parseInt(limit) || 12);
+
+    const searchTerm = name || search || "";
+
+    console.log("🔍 Search params:", {
+      category,
+      searchTerm,
+      page: validPage,
+      limit: validLimit,
+    });
+
+    const searchParams = new URLSearchParams();
+
+    if (category && category.trim() !== "") {
+      searchParams.set("category", category.trim());
+    }
+
+    if (searchTerm && searchTerm.trim() !== "") {
+      searchParams.set("search", searchTerm.trim());
+    }
+
+    searchParams.set("page", validPage.toString());
+    searchParams.set("limit", validLimit.toString());
+
+    const url = `/products?${searchParams.toString()}`;
+    console.log("🌐 API URL:", url);
+
+    const response = await instance.get(url);
+    console.log("📦 API Response:", response.data);
+
+    const responseData = response.data.data || {};
+    const products = responseData.products || [];
+    const pagination = responseData.pagination || {};
+
+    const result = {
+      products: products,
+      currentPage: pagination.page || validPage,
+      totalPages: pagination.totalPages || 1,
+      totalProducts: pagination.total || products.length,
+    };
+
+    console.log("✅ Processed result:", result);
+    return result;
+  } catch (error) {
+    console.error("❌ Search error:", error);
+    console.error("Error details:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+    });
+
+    return {
+      products: [],
+      currentPage: 1,
+      totalPages: 1,
+      totalProducts: 0,
+    };
+  }
+});
+
 export const getCustomerReviews = createAsyncThunk("reviews", async (body) => {
   try {
     const { limit = 3 } = body;
@@ -44,38 +115,6 @@ export const getAllStores = createAsyncThunk("all-stores", async (body) => {
   } catch (error) {
     console.warn("getAllStores failed:", error.message);
     return [];
-  }
-});
-
-export const getSearchProducts = createAsyncThunk("products", async (body) => {
-  try {
-    const { category = "", name = "", page = 1, limit = 12 } = body;
-
-    const validPage = Math.max(1, parseInt(page) || 1);
-    const validLimit = Math.max(1, parseInt(limit) || 12);
-
-    const response = await instance.get(
-      `/products?category=${category}&name=${name}&page=${validPage}&limit=${validLimit}`
-    );
-
-    const responseData = response.data.data || {};
-    const products = responseData.products || [];
-    const pagination = responseData.pagination || {};
-
-    return {
-      products: products,
-      currentPage: pagination.page || validPage,
-      totalPages: pagination.totalPages || 1,
-      totalProducts: pagination.total || products.length,
-    };
-  } catch (error) {
-    console.warn("getSearchProducts failed:", error.message);
-    return {
-      products: [],
-      currentPage: 1,
-      totalPages: 1,
-      totalProducts: 0,
-    };
   }
 });
 

@@ -1,4 +1,4 @@
-.container {
+/* .container {
   width: 375px;
   margin: 0 auto;
   padding-top: 22px;
@@ -23,6 +23,91 @@
 
 .defaultBackground {
   background: #f7f8fa;
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.burgerBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.burgerBtn svg {
+  width: 32px;
+  height: 26px;
+}
+
+.whiteSvg {
+  stroke: #fff;
+}
+
+.greenSvg {
+  stroke: #59b17a;
+}
+
+.box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding-top: 28px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .wrapper {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1440px;
+    padding-left: 128px;
+    padding-right: 128px;
+  }
+} */
+
+/* frontend/src/components/Header/Header.module.css */
+.header {
+  width: 100%;
+}
+
+.homeBackground {
+  background: #59b17a;
+  width: 100%;
+}
+
+.defaultBackground {
+  background: #f7f8fa;
+  width: 100%;
+}
+
+.container {
+  width: 375px;
+  margin: 0 auto;
+  padding-top: 22px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 374px) {
+  .container {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 .wrapper {

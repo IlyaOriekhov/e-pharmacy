@@ -1,4 +1,4 @@
-.container {
+/* .container {
   width: 375px;
   margin: 0 auto;
   padding-top: 20px;
@@ -7,6 +7,98 @@
   padding-right: 20px;
   box-sizing: border-box;
   background: var(--color-green);
+}
+
+@media (max-width: 374px) {
+  .container {
+    width: 100%;
+    min-width: 320px;
+  }
+}
+
+.mainWrapper {
+  margin-bottom: 20px;
+}
+
+.textWrapper {
+  margin-bottom: 40px;
+}
+
+.text {
+  color: var(--color-sub-white);
+  width: 261px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28em;
+  margin-bottom: 0;
+}
+
+.linksWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .mainWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 88px;
+  }
+
+  .textWrapper {
+    margin-bottom: 0;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.25em;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1440px;
+    padding: 40px 128px;
+  }
+
+  .mainWrapper {
+    gap: 115px;
+    margin-bottom: 64px;
+  }
+
+  .text {
+    width: 311px;
+  }
+
+  .linksWrapper {
+    flex-direction: row;
+    gap: 270px;
+  }
+} */
+
+/* frontend/src/components/Footer/Footer.module.css */
+.footer {
+  background: var(--color-green);
+  width: 100%;
+}
+
+.container {
+  width: 375px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 374px) {

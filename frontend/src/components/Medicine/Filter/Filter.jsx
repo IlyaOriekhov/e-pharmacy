@@ -12,7 +12,9 @@ const customStyles = {
   control: (baseStyles, state) => ({
     ...baseStyles,
     borderRadius: "60px",
-    border: state.isFocused & "1px solid #59B17A",
+    border: state.isFocused
+      ? "1px solid #59B17A"
+      : "1px solid rgba(29, 30, 33, 0.1)",
     height: "46px",
     background: "#fff",
     fontSize: "12px",
@@ -97,66 +99,78 @@ const Filter = () => {
   const [searchParams] = useSearchParams();
 
   const categoryFromUrl = searchParams.get("category") || "";
-  const nameFromUrl =
+  const searchFromUrl =
     searchParams.get("name") || searchParams.get("search") || "";
   const pageFromUrl = parseInt(searchParams.get("page")) || 1;
 
   const [selectedCategory, setSelectedCategory] = useState(() => {
     return options.find((opt) => opt.value === categoryFromUrl) || options[0];
   });
-  const [searchedName, setSearchedName] = useState(nameFromUrl);
+  const [searchInput, setSearchInput] = useState(searchFromUrl);
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1440px)" });
 
-  const updateURL = (newCategory, newName, newPage = 1) => {
-    const params = new URLSearchParams();
+  const executeSearch = React.useCallback(
+    (category = "", search = "", page = 1) => {
+      console.log("🔍 Executing search:", { category, search, page });
 
-    if (newCategory && newCategory !== "") {
-      params.set("category", newCategory);
-    }
-    if (newName && newName !== "") {
-      params.set("name", newName);
-    }
-    params.set("page", newPage.toString());
+      dispatch(setCurrentPage(page));
 
-    const queryString = params.toString();
-    navigate(`?${queryString}`, { replace: false });
-  };
+      dispatch(
+        getSearchProducts({
+          category: category,
+          name: search,
+          search: search,
+          page: page,
+          limit: isDesktop ? 12 : 9,
+        })
+      );
+
+      const params = new URLSearchParams();
+      if (category) params.set("category", category);
+      if (search) params.set("search", search);
+      params.set("page", page.toString());
+
+      navigate(`?${params.toString()}`, { replace: false });
+    },
+    [dispatch, isDesktop, navigate]
+  );
 
   useEffect(() => {
-    dispatch(setCurrentPage(pageFromUrl));
-
-    dispatch(
-      getSearchProducts({
-        category: categoryFromUrl,
-        name: nameFromUrl,
-        page: pageFromUrl,
-        limit: isDesktop ? 12 : 9,
-      })
-    );
-  }, [dispatch, categoryFromUrl, nameFromUrl, pageFromUrl, isDesktop]);
+    executeSearch(categoryFromUrl, searchFromUrl, pageFromUrl);
+  }, [categoryFromUrl, searchFromUrl, pageFromUrl, executeSearch]);
 
   const handleCategoryChange = (selectedOption) => {
+    console.log("📂 Category changed:", selectedOption.value);
     setSelectedCategory(selectedOption);
-    updateURL(selectedOption.value, searchedName, 1);
-    dispatch(setCurrentPage(1));
+    executeSearch(selectedOption.value, searchInput, 1);
   };
 
-  const handleSearchInputChange = (e) => {
-    setSearchedName(e.target.value);
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    console.log("✏️ Search input changed:", value);
+    setSearchInput(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateURL(selectedCategory.value, searchedName, 1);
-    dispatch(setCurrentPage(1));
+    console.log("🚀 Form submitted");
+    executeSearch(selectedCategory.value, searchInput, 1);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      console.log("⌨️ Enter pressed");
+      executeSearch(selectedCategory.value, searchInput, 1);
+    }
   };
 
   const handleReset = () => {
+    console.log("🔄 Reset filters");
     setSelectedCategory(options[0]);
-    setSearchedName("");
-    navigate("/medicine?page=1", { replace: false });
-    dispatch(setCurrentPage(1));
+    setSearchInput("");
+    executeSearch("", "", 1);
   };
 
   return (
@@ -169,18 +183,21 @@ const Filter = () => {
         value={selectedCategory}
         className={styles.customSelect}
       />
+
       <label className={styles.label}>
         <input
           type="text"
           placeholder="Search medicine"
-          onChange={handleSearchInputChange}
-          value={searchedName}
+          value={searchInput}
+          onChange={handleSearchChange}
+          onKeyDown={handleKeyDown}
           className="input"
         />
         <svg className={styles.searchIcon}>
           <use href={`${sprite}#search`} />
         </svg>
       </label>
+
       <div className={styles.buttonGroup}>
         <button type="submit" className={`btn-primary ${styles.submitBtn}`}>
           <svg className={styles.filterIcon}>

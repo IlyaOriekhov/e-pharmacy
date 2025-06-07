@@ -35,6 +35,23 @@ const AddPharmacyPromo = () => {
     }
   };
 
+  const features = [
+    "Take user orders form online",
+    "Create your shop profile",
+    "Manage your store",
+    "Get more orders",
+    "Storage shed",
+  ];
+
+  const renderFeatureItem = (text, index) => (
+    <li key={index} className={styles.featureItem}>
+      <svg className={styles.featureIcon}>
+        <use href={`${sprite}#lightning`} />
+      </svg>
+      {text}
+    </li>
+  );
+
   return (
     <section>
       <div className={styles.container}>
@@ -58,38 +75,20 @@ const AddPharmacyPromo = () => {
             <img srcSet={getImageSrcSet()} alt="addmed" />
           </div>
         </div>
-        <ul className={styles.featuresList}>
-          <li className={styles.featureItem}>
-            <svg className={styles.featureIcon}>
-              <use href={`${sprite}#lightning`} />
-            </svg>
-            Take user orders form online
-          </li>
-          <li className={styles.featureItem}>
-            <svg className={styles.featureIcon}>
-              <use href={`${sprite}#lightning`} />
-            </svg>
-            Create your shop profile
-          </li>
-          <li className={styles.featureItem}>
-            <svg className={styles.featureIcon}>
-              <use href={`${sprite}#lightning`} />
-            </svg>
-            Manage your store
-          </li>
-          <li className={styles.featureItem}>
-            <svg className={styles.featureIcon}>
-              <use href={`${sprite}#lightning`} />
-            </svg>
-            Get more orders
-          </li>
-          <li className={styles.featureItem}>
-            <svg className={styles.featureIcon}>
-              <use href={`${sprite}#lightning`} />
-            </svg>
-            Storage shed
-          </li>
-        </ul>
+
+        <div className={styles.featuresWrapper}>
+          <ul className={styles.featuresList}>
+            {features.map((feature, index) =>
+              renderFeatureItem(feature, `first-${index}`)
+            )}
+            {features.map((feature, index) =>
+              renderFeatureItem(feature, `second-${index}`)
+            )}
+            {features.map((feature, index) =>
+              renderFeatureItem(feature, `third-${index}`)
+            )}
+          </ul>
+        </div>
       </div>
     </section>
   );
