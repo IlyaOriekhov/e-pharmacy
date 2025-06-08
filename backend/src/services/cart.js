@@ -103,8 +103,14 @@ export const addToCart = async (userId, productId, quantity = 1) => {
     }
 
     const stock = parseInt(product.stock) || 0;
+
     if (stock < quantity) {
-      throw new Error("Insufficient stock");
+      return {
+        success: false,
+        message: "Insufficient stock",
+        availableStock: stock,
+        requestedQuantity: quantity,
+      };
     }
 
     const user = await User.findById(userId);
@@ -124,7 +130,14 @@ export const addToCart = async (userId, productId, quantity = 1) => {
       const newQuantity = user.cart[existingItemIndex].quantity + quantity;
 
       if (newQuantity > stock) {
-        throw new Error("Insufficient stock");
+        return {
+          success: false,
+          message: "Insufficient stock",
+          availableStock: stock,
+          currentInCart: user.cart[existingItemIndex].quantity,
+          requestedQuantity: quantity,
+          totalRequested: newQuantity,
+        };
       }
 
       user.cart[existingItemIndex].quantity = newQuantity;

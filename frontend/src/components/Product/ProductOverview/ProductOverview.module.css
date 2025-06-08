@@ -106,6 +106,29 @@
   line-height: 1.28em;
 }
 
+.stockInfo {
+  color: var(--color-gray);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5em;
+  margin: 4px 0 0 0;
+}
+
+.amountBox button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.amountBox button:disabled svg {
+  stroke: #ccc;
+}
+
+.addToCartBtn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  background: #ccc !important;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     flex-direction: row;
@@ -137,6 +160,10 @@
 
   .btnBox {
     gap: 12px;
+  }
+
+  .stockInfo {
+    font-size: 14px;
   }
 }
 

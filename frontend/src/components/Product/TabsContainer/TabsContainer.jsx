@@ -122,11 +122,9 @@ const TabsContainer = () => {
                   {review.testimonial || review.review}
                 </p>
 
-                {/* Рейтинг */}
                 <div className={styles.ratingBox}>
                   <div className={styles.stars}>
                     {isTabletOrDesktop ? (
-                      // На планшеті/десктопі - всі 5 зірок
                       [...Array(5)].map((_, starIndex) => (
                         <svg
                           key={starIndex}
@@ -140,7 +138,6 @@ const TabsContainer = () => {
                         </svg>
                       ))
                     ) : (
-                      // На мобільному - тільки одна зірка
                       <svg className={styles.starIcon}>
                         <use href={`${sprite}#star`} />
                       </svg>

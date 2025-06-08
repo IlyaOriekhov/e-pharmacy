@@ -168,20 +168,52 @@ export const addToCart = createAsyncThunk(
   async (body, { rejectWithValue, getState }) => {
     try {
       const state = getState();
-      const token = state.auth.token;
+      const token = state.auth.token || localStorage.getItem("accessToken");
 
       if (!token) {
         return rejectWithValue("No authentication token");
       }
 
+      if (!body.productId) {
+        return rejectWithValue("Product ID is required");
+      }
+
+      if (!body.quantity || body.quantity < 1) {
+        return rejectWithValue("Valid quantity is required");
+      }
+
       setToken(token);
-      const response = await instance.post("/cart/add", body);
+
+      const requestBody = {
+        productId: body.productId,
+        quantity: parseInt(body.quantity, 10),
+      };
+
+      const response = await instance.post("/cart/add", requestBody);
+
+      if (response.data.success === false) {
+        const availableStock = response.data.data?.availableStock || 0;
+        toast.error(`Sorry, only ${availableStock} items available in stock`);
+
+        return {
+          success: false,
+          message: response.data.message,
+          data: response.data.data,
+        };
+      }
 
       toast.success("Product added to cart");
       return response.data;
     } catch (error) {
-      toast.error("Failed to add product to cart");
-      return rejectWithValue(error.message);
+      if (error.response?.status === 401) {
+        toast.error("Please login to add products to cart");
+      } else if (error.response?.status === 404) {
+        toast.error("Product not found");
+      } else {
+        toast.error("Failed to add product to cart");
+      }
+
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );

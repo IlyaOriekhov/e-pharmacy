@@ -34,20 +34,31 @@ export const addItemToCart = async (req, res) => {
     const userId = req.user._id;
     const { productId, quantity = 1 } = req.body;
 
-    const cartData = await addToCart(userId, productId, Number(quantity));
+    const result = await addToCart(userId, productId, Number(quantity));
+
+    if (result && result.success === false) {
+      return res.status(200).json({
+        status: 200,
+        success: false,
+        message: result.message,
+        data: {
+          availableStock: result.availableStock,
+          requestedQuantity: result.requestedQuantity,
+          currentInCart: result.currentInCart || 0,
+          totalRequested: result.totalRequested || result.requestedQuantity,
+        },
+      });
+    }
 
     const response = {
       status: 200,
       message: "Item added to cart successfully",
-      data: cartData,
+      data: result,
     };
 
     res.status(200).json(response);
   } catch (error) {
-    if (
-      error.message.includes("not found") ||
-      error.message.includes("stock")
-    ) {
+    if (error.message.includes("not found")) {
       throw createHttpError(400, error.message);
     }
     throw createHttpError(500, "Failed to add item to cart");

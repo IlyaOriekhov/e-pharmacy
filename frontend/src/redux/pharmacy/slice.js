@@ -18,7 +18,6 @@ const initialState = {
   reviews: [],
   products: [],
   product: null,
-  // cart:  [],
   cart: {
     cartProducts: [],
     total: 0,
@@ -112,8 +111,13 @@ export const slice = createSlice({
           };
         }
       })
+
       .addCase(addToCart.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+
+        if (payload && payload.success === false) {
+          return;
+        }
 
         if (payload.data) {
           state.cart = {
