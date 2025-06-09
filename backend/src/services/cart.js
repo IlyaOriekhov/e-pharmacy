@@ -44,7 +44,6 @@ const fixProductImage = (product) => {
   let photo = product.photo;
 
   if (brokenUrls.includes(photo)) {
-    // Використовуємо productId для консистентного вибору зображення
     const productIdStr = product._id ? product._id.toString() : "default";
     const hash = productIdStr
       .split("")
