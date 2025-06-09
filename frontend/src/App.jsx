@@ -8,6 +8,7 @@ import { setToken } from "./redux/instance";
 
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./routes/PrivateRoute";
+import AutoLogout from "./components/AutoLogout/AutoLogout";
 import "react-toastify/dist/ReactToastify.css";
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -49,6 +50,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <TokenInitializer />
+        <AutoLogout />
         <Routes>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
