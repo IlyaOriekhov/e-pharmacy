@@ -54,29 +54,33 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
-export const logoutThunk = createAsyncThunk(
-  "logout",
-  async (_, { rejectWithValue }) => {
+export const logoutThunk = createAsyncThunk("logout", async () => {
+  try {
     try {
       await instance.get("/user/logout");
-      toast.success("User logged out successfully");
-      clearToken();
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("accessToken");
-    } catch (error) {
-      if (error.response) {
-        switch (error.response.status) {
-          case 401:
-            toast.error("You are not authorized to log out.");
-            break;
-          default:
-            toast.error("Something went wrong. Please try again later");
-        }
-      }
-      return rejectWithValue(error.message);
+    } catch {
+      //e
     }
+
+    clearToken();
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("persist:auth");
+    localStorage.removeItem("persist:pharmacy");
+
+    toast.success("User logged out successfully");
+
+    return { success: true };
+  } catch {
+    clearToken();
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("persist:auth");
+    localStorage.removeItem("persist:pharmacy");
+
+    return { success: true };
   }
-);
+});
 
 export const getUserInfoThunk = createAsyncThunk(
   "user-info",
