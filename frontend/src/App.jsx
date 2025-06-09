@@ -2,7 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 import { store, persistor } from "./redux/store";
+import { setToken } from "./redux/instance";
 
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -17,10 +19,36 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import CartPage from "./pages/CartPage/CartPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
+function TokenInitializer() {
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+    if (token) {
+      setToken(token);
+    }
+
+    const handleFocus = () => {
+      const currentToken = localStorage.getItem("accessToken");
+      if (currentToken) {
+        setToken(currentToken);
+      }
+    };
+
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, []);
+
+  return null;
+}
+
 function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <TokenInitializer />
         <Routes>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />

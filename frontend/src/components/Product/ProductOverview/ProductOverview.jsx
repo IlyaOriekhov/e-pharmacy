@@ -21,8 +21,12 @@ const ProductOverview = () => {
   const [openSignUp, setOpenSignUp] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn && token) {
+    const storedToken = localStorage.getItem("accessToken");
+    if (storedToken) {
+      setToken(storedToken);
+    } else if (isLoggedIn && token) {
       setToken(token);
+      localStorage.setItem("accessToken", token);
     }
   }, [isLoggedIn, token]);
 
@@ -47,13 +51,11 @@ const ProductOverview = () => {
   };
 
   const handleAddToCart = async (id) => {
-    if (!isLoggedIn) {
-      handleOpenSignIn();
-      return;
-    }
+    const storedToken = localStorage.getItem("accessToken");
+    const currentToken = token || storedToken;
 
-    if (!token) {
-      toast.error("Authentication error. Please login again.");
+    if (!isLoggedIn || !currentToken) {
+      handleOpenSignIn();
       return;
     }
 
@@ -68,7 +70,7 @@ const ProductOverview = () => {
     }
 
     try {
-      setToken(token);
+      setToken(currentToken);
 
       await dispatch(
         addToCart({
@@ -81,7 +83,7 @@ const ProductOverview = () => {
 
       setAmount(1);
     } catch {
-      //err
+      // err
     }
   };
 
@@ -91,6 +93,9 @@ const ProductOverview = () => {
 
   const currentStock = parseInt(product?.stock) || 0;
   const isOutOfStock = currentStock === 0;
+
+  const storedToken = localStorage.getItem("accessToken");
+  const isUserAuthenticated = isLoggedIn && (token || storedToken);
 
   return (
     <>
@@ -103,6 +108,7 @@ const ProductOverview = () => {
             <div>
               <h1 className={styles.name}>{product.name}</h1>
               <p className={styles.text}>{product.category}</p>
+              {/* Показуємо інформацію про stock */}
               <p className={styles.stockInfo}>
                 {isOutOfStock ? (
                   <span style={{ color: "#e85050" }}>Out of stock</span>
@@ -146,7 +152,11 @@ const ProductOverview = () => {
                 cursor: isOutOfStock ? "not-allowed" : "pointer",
               }}
             >
-              {isOutOfStock ? "Out of Stock" : "Add to cart"}
+              {isOutOfStock
+                ? "Out of Stock"
+                : isUserAuthenticated
+                ? "Add to cart"
+                : "Login to add"}
             </button>
           </div>
         </div>

@@ -168,7 +168,7 @@ export const addToCart = createAsyncThunk(
   async (body, { rejectWithValue, getState }) => {
     try {
       const state = getState();
-      const token = state.auth.token || localStorage.getItem("accessToken");
+      let token = state.auth.token || localStorage.getItem("accessToken");
 
       if (!token) {
         return rejectWithValue("No authentication token");
