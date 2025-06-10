@@ -1,39 +1,46 @@
-# E-Pharmacy - Online Pharmacy Platform
+# 💊 E-Pharmacy - Your Digital Healthcare Companion
 
-E-Pharmacy is a modern web platform for online pharmacies that allows customers to browse medications, manage their cart, and place orders with ease.
+<div align="center">
+Making healthcare accessible through technology 🏥💊
+</div>
 
-## 🔥 Features
+## 🌟 Overview
 
-### 🔐 Authentication
+E-Pharmacy is a modern, full-stack web application that revolutionizes the way people access medications and pharmacy services. Built with cutting-edge technologies, it provides a seamless experience for browsing medicines, managing orders, and connecting with local pharmacies.
 
-- User registration and login
-- Protected routes for authenticated users
-- Persistent login sessions
+### 🎯 Mission: To bridge the gap between patients and pharmacies through intuitive digital solutions.
 
-### 🏪 Store Management
+## ✨ Key Features
 
-- Browse nearest pharmacies
-- Filter stores by location, status, and rating
-- Detailed store information with contact details
-- Store ratings and reviews
+### 🔐 Smart Authentication System
 
-### 💊 Product Catalog
+- Secure JWT-based login/registration
+- Protected routes and persistent sessions
+- Auto-logout on token expiration
+- User profile management
 
-- Browse extensive medication catalog
-- Advanced filtering (category, price range, search)
-- Sorting options (name, price, date, category)
-- Pagination for large product lists
-- Detailed product pages with descriptions and reviews
+### 🏪 Pharmacy Network
 
-### 🛒 Shopping Cart
+- Discover Nearby Stores - Find pharmacies in your area
+- Store Ratings & Reviews - Make informed decisions
+- Real-time Status - Know which stores are open
+- Contact Integration - Direct phone calls and map navigation
 
-- Add/remove products from cart
-- Update product quantities
-- Real-time cart updates
-- Order summary with delivery calculations
-- Secure checkout process
+### 💊 Advanced Medicine Catalog
 
-### 📱 Responsive Design
+- Smart Search - Find medicines by name, category, or supplier
+- Dynamic Filtering - Category-based filtering with real-time results
+- Detailed Product Pages - Complete medicine information with reviews
+- Stock Management - Real-time inventory tracking
+
+### 🛒 Intelligent Shopping Cart
+
+- Real-time Updates - Instant cart synchronization
+- Stock Validation - Prevent overselling with live inventory checks
+- Smart Calculations - Automatic totals with delivery fees
+- Persistent Cart - Your items saved across sessions
+
+### 📱 Responsive Design Excellence
 
 - Mobile-first approach
 - Breakpoints:
@@ -45,15 +52,13 @@ E-Pharmacy is a modern web platform for online pharmacies that allows customers 
 
 ### Frontend
 
-- **React 19.1.0** - UI library
-- **Vite 6.3.5** - Build tool
-- **Redux Toolkit** - State management
-- **Redux Persist** - State persistence
-- **React Router DOM** - Routing
+- **React 19.1.0** - Modern UI library with latest features
+- **Redux Toolkit** - Efficient state management
+- **React Router DOM** - Declarative routing
+- **Vite 6.3.5** - Lightning-fast build tool
 - **Formik + Yup** - Form handling and validation
-- **Axios** - HTTP client
-- **React Toastify** - Notifications
-- **CSS Modules** - Styling
+- **Axios** - HTTP client with interceptors
+- **CSS Modules** - Component-scoped styling
 
 ### Backend
 
@@ -101,10 +106,6 @@ MONGODB_URL=your_mongodb_cluster_url
 MONGODB_DB=e_pharmacy
 ```
 
-### Frontend
-
-No environment variables required for development.
-
 ## 📱 Pages & Components
 
 ### Public Pages
@@ -120,76 +121,13 @@ No environment variables required for development.
 - **MedicinePage** - Product catalog with filters
 - **CartPage** - Shopping cart and checkout
 
-### Key Components
-
-- **SharedLayout** - Header and footer wrapper
-- **ProductFilters** - Advanced product filtering
-- **ProductsList** - Product grid display
-- **CartItem** - Individual cart item management
-- **CheckoutForm** - Order placement form
-- **AuthModal** - Authentication prompt for guests
-
 ## 🎨 Design System
-
-### Colors
-
-- Primary: `#59b17a` (Green)
-- Secondary: `#1d1e21` (Dark)
-- Background: `#f7f8fa` (Light gray)
-- Text: `#6c757d` (Medium gray)
-- Error: `#ef4444` (Red)
-- Success: `#28a745` (Green)
 
 ### Typography
 
 - Font Family: Inter
 - Headings: 600-700 weight
 - Body: 400-500 weight
-
-## 🔄 State Management
-
-### Redux Slices
-
-- **authSlice** - User authentication state
-- **productsSlice** - Product catalog and filters
-- **storesSlice** - Pharmacy stores management
-- **cartSlice** - Shopping cart operations
-- **reviewsSlice** - Customer reviews
-
-## 🚀 Deployment
-
-### Frontend (Vercel)
-
-```bash
-npm run build
-# Deploy to Vercel or similar platform
-```
-
-### Backend (Render/Railway)
-
-```bash
-npm start
-# Deploy to your preferred hosting platform
-```
-
-## 🧪 Scripts
-
-### Frontend
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-```
-
-### Backend
-
-```bash
-npm run dev          # Start development server with nodemon
-npm start            # Start production server
-npm run lint         # Run ESLint
-```
 
 ## 📄 API Endpoints
 
@@ -201,21 +139,14 @@ npm run lint         # Run ESLint
 - `GET /api/user/user-info` - Get user information
 - `POST /api/user/refresh` - Refresh access token
 
-### Products
+### Products & Stores
 
 - `GET /api/products` - Get products with filters
 - `GET /api/products/:id` - Get single product
-- `GET /api/products/categories` - Get product categories
-- `GET /api/products/search` - Search products
-
-### Stores
-
 - `GET /api/stores` - Get all stores
 - `GET /api/stores/nearest` - Get nearest stores
-- `GET /api/stores/:id` - Get single store
-- `GET /api/stores/cities` - Get store cities
 
-### Cart
+### Shopping Cart
 
 - `GET /api/cart` - Get user cart
 - `POST /api/cart/add` - Add item to cart
@@ -227,47 +158,9 @@ npm run lint         # Run ESLint
 
 - `GET /api/customer-reviews` - Get customer reviews
 
-## 📋 Features Checklist
-
-### ✅ Completed
-
-- [x] User authentication (register/login/logout)
-- [x] Protected routes
-- [x] Product catalog with filtering
-- [x] Shopping cart functionality
-- [x] Store listings and details
-- [x] Responsive design
-- [x] Form validation
-- [x] State persistence
-- [x] Loading states and error handling
-- [x] Toast notifications
-
-### 🔄 Future Enhancements
-
-- [ ] Order history page
-- [ ] User profile management
-- [ ] Product reviews and ratings
-- [ ] Wishlist functionality
-- [ ] Email notifications
-- [ ] Payment integration
-- [ ] Real-time order tracking
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License.
-
-## 👥 Team
-
-- **Frontend Developer** - React, Redux, CSS Modules
-- **Backend Developer** - Node.js, Express, MongoDB
 
 ---
 
